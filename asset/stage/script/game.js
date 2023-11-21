@@ -56,6 +56,7 @@ function checkAnswers() {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (150 - 100 + 1) + 100);
         // Add the random reward to the existing amount
+        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
         playerInfoRef.child("coin").transaction(function (currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -147,6 +148,7 @@ function displayResult(message) {
             // Generate a random reward between 100 and 200 coins
             const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
             // Add the random reward to the existing amount
+            const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
             playerInfoRef.child("coin").transaction(function(currentCoin) {
                 return (currentCoin || 0) + randomReward;
             });

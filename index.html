@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>Loading Entrance</title>
+</head>
+<body  class="loading-entrance min-h-screen flex flex-col items-center justify-center bg-cover bg-center bg-black" >
+
+    <div class="loading text-white text-4xl font-bold p-5 relative mb-4">
+        <div class="shadow-2xl p-1 rounded-full">
+            <img src="./asset/src/icon/LOGO.png" class="h-24 w-60 m-5 " alt="">
+        </div>
+    </div>
+    <div class="text-center m-4">
+        <h4 class="text-xs font-bold text-white">WELCOME TO RATIOMANIA</h4>
+    </div>
+
+    <div id="loading-bar" class="w-64 h-4 bg-gray-300 rounded-2xl border-4 ">
+        <div id="progress" class="h-full bg-gray-500 rounded-2xl"></div>
+    </div>
+    <div id="loadingtext" class="text-center text-white text-xs"> Loading...</div>
+    <button id="get-started-button" class="hidden bg-gray-500 text-white px-4 py-2 mt-4 border-4 rounded-2xl font-bold">Get Started</button>
+
+    <script src="./asset/feature/index/loading.js"></script>
+</body>
+</html>

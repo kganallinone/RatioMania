@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Your Website</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'NicoMoji';
+        src: url('./src/font/NicoMoji-Regular.ttf') format('truetype'); /* Replace with the actual path */
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .font-nico-moji {
+        font-family: 'NicoMoji', sans-serif;
+    }
+
+</style>
+<body class="bg-gray-800 overflow-auto w-screen">
+    <header class="bg-gray-900 text-white py-4 px-4 md:px-16 flex items-center justify-between">
+
+        <!-- Left side with logo -->
+        <div>
+            <img src="/asset/src/icon/LOGO.png" class="h-12 md:h-16" alt="Logo">
+        </div>
+    
+        <!-- Right side with Google Home Icon and link -->
+        <div class="flex items-center relative">
+    
+            <a href="#" id="setting-link" class="text-white mx-2 md:mx-4 relative">
+                <i class="material-icons text-2xl">settings</i>
+            </a>
+    
+            <!-- Dropdown content -->
+            <div id="dropdown" class="absolute right-0 mt-16 bg-white text-gray-800 rounded-md shadow-md hidden">
+                <a href="#"  id="logout-link" class="block px-4 py-2 text-sm">Logout</a>
+            </div>
+    
+        </div>
+    
+    </header>
+    
+
+    <section class="py-4 px-2 md:px-16" style="font-family: 'NicoMoji', sans-serif;">
+        <div class="bg-gray-700 p-2 rounded-md px-2 md:px-4 lg:px-24 py-5 shadow-lg">
+            <!-- 1st Row: Username -->
+            <div class="text-center mb-2">
+                <span id="username" class="text-white text-lg"></span>
+            </div>
+            <div class="bg-gray-500 h-0.5 rounded mb-2"></div>
+            <!-- 2nd Row: Coin and Level with Google Material Icons -->
+            <div class="flex justify-between gap-1">
+                <div class="flex items-center bg-gray-800 border-2 border-white p-1 rounded rounded-md w-1/2 md:w-1/2 lg:w-1/2">
+                    <i class="material-icons text-white mr-2">monetization_on</i>
+                    <span id="coin" class="text-white"></span>
+                </div>
+                <div class="flex items-center bg-gray-800 border-2 border-white p-1 rounded rounded-md w-1/2 md:w-1/2 lg:w-1/2">
+                    <i class="material-icons text-white mr-2">star</i>
+                    <span id="rank" class="text-white"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-1 px-2 md:px-16">
+        <div class="bg-gray-700 p-2 rounded-md shadow-lg">
+            <div>
+                <h1 class="text-white text-lg">TUTORIALS AND LESSONS</h1>
+            </div>
+            <div class="bg-gray-100 h-0.5 "></div>
+            <div class="relative bg-cover bg-center h-64" style="background-image: url('./src/bg/BG1.png');">
+                <!-- Content inside the container -->
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <div class="flex justify-end">
+                        <!-- Use an anchor tag with href to navigate to another page -->
+                        <a id="tutorial-link" href="#" class="bg-yellow-700 text-white py-1 rounded-md border px-3">READ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="py-1 px-2 md:px-16 mb-4">
+        <div class="bg-gray-700 p-2 rounded-md shadow-lg">
+            <div>
+                <h1 class="text-white text-lg">TRY IT!</h1>
+            </div>
+            <div class="bg-gray-100 h-0.5 "></div>
+            <div class="relative bg-cover bg-center h-64" style="background-image: url('./src/bg/BG2.png');">
+                <!-- Content inside the container -->
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <div class="flex justify-end">
+                        <a id="play-link" href="#" class="bg-yellow-700 text-white py-1 rounded-md border px-3">PLAY</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-900 py-4 md:px-16">
+       
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./feature/auth/config.js"></script>
+    <script src="./feature/dashboard/getdata.js"></script>
+    <script>
+    // JavaScript to toggle the visibility of the dropdown
+    document.getElementById('setting-link').addEventListener('click', function () {
+        var dropdown = document.getElementById('dropdown');
+        dropdown.classList.toggle('hidden');
+    });
+
+    // Redirect to the login page in a new tab when the user clicks the "Logout" link
+    document.getElementById('logout-link').addEventListener('click', function () {
+        // Open 'login.html' in a new tab
+        window.open('connect.html', '_blank');
+
+        // Disable the back button functionality
+        history.replaceState(null, null, window.location.href);
+
+        // Close the current tab (optional, may not work in all browsers)
+        window.close();
+    });
+    </script>
+
+
+</body>
+</html>

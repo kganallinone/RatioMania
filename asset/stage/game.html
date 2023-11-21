@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Your Website</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'NicoMoji';
+        src: url('./src/font/NicoMoji-Regular.ttf') format('truetype'); /* Replace with the actual path */
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .font-nico-moji {
+        font-family: 'NicoMoji', sans-serif;
+    }
+
+</style>
+<body class="bg-gray-800 overflow-auto w-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white py-4 px-2 md:px-16">
+        <div>
+            <img src="/asset/src/icon/LOGO.png" class="h-16">
+        </div>
+        <div>
+            
+        </div>
+       
+    </header>
+ <!-- =================================================================================================
+    STAGE 1
+    ================================================================================================= -->
+    <section id="stage1" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">STAGE 1 - Terminating by Tenths </h1>
+        <p class="mb-4 text-yellow-400">Convert the following decimal numbers into fractions and simplify if possible.</p>
+        
+        <div id="quiz-container">
+          
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswers()">Submit Answers</button>
+    </section>
+  
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden justify-center items-center">
+        <div class="bg-white p-8 rounded-md shadow-md">
+            <p class="text-lg font-semibold mb-4" id="modal-content"></p>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+
+ <!-- =================================================================================================
+    STAGE 2
+    ================================================================================================= -->
+  <!-- Stage 2 -->
+<section id="stage2" class="py-4 px-5 md:px-16 hidden">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 2 – Terminating by Hundredths</h1>
+    <p class="mb-4 text-yellow-400">Convert the following decimal numbers into fractions and simplify if possible.</p>
+    
+    <div id="quiz-container-stage2">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage2()">Submit Answers</button>
+</section>
+
+ <!-- =================================================================================================
+    STAGE 3
+    ================================================================================================= -->
+
+<!-- Stage 3 -->
+<section id="stage3" class="py-4 px-5 md:px-16 hidden overflow-auto">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 3 – Terminating by Thousandths</h1>
+    <p class="mb-4 text-yellow-400">Match each decimal number with its equivalent fraction.</p>
+    
+    <div id="quiz-container-stage3">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage3()">Submit Answers</button>
+</section>
+ <!-- =================================================================================================
+    STAGE 4
+    ================================================================================================= -->
+
+
+<!-- Stage 4 -->
+<section id="stage4" class="py-4 px-5 md:px-16 hidden">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 4 – Terminating by Ten Thousandths</h1>
+    <p class="mb-4 text-yellow-400">Match each decimal number with its equivalent fraction.</p>
+    
+    <div id="quiz-container-stage4">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage4()">Submit Answers</button>
+</section>
+
+ <!-- =================================================================================================
+    STAGE 5
+    ================================================================================================= -->
+
+    <!-- Stage 5 -->
+<section id="stage5" class="py-4 px-5 md:px-16 hidden mb-10">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 5 – Mixed Questions about Terminating Decimals</h1>
+    <p class="mb-4 text-yellow-400">Choose the right answer</p>
+    
+    <div id="quiz-container-stage5">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage5()">Submit Answers</button>
+</section>
+
+ <!-- =================================================================================================
+    STAGE 6
+    ================================================================================================= -->
+
+<!-- Stage 6 -->
+<section id="stage6" class="py-4 px-5 md:px-16 hidden">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 6 – Non-Terminating by Tenths</h1>
+    <p class="mb-4 text-yellow-400">Convert the following non-terminating decimal numbers into fractions.</p>
+    
+    <div id="quiz-container-stage6">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage6()">Submit Answers</button>
+</section>
+ <!-- =================================================================================================
+    STAGE 7
+    ================================================================================================= -->
+<!-- Stage 7 -->
+<section id="stage7" class="py-4 px-5 md:px-16 hidden">
+    <h1 class="text-2xl font-bold mb-4 text-white">Stage 7 – Non-Terminating by Hundredths</h1>
+    <p class="mb-4 text-yellow-400">Convert the following non-terminating decimal numbers into fractions.</p>
+    
+    <div id="quiz-container-stage7">
+        <!-- Questions will be added here dynamically using JavaScript -->
+    </div>
+
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage7()">Submit Answers</button>
+</section>
+ <!-- =================================================================================================
+    STAGE 8
+    ================================================================================================= -->
+
+    <section id="stage8" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">Stage 8 – Non-Terminating by Thousandths</h1>
+        <p class="mb-4 text-yellow-400">Match each decimal number with its equivalent fraction.</p>
+        
+        <div id="quiz-container-stage8">
+            <!-- Questions will be added here dynamically using JavaScript -->
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage8()">Submit Answers</button>
+    </section>
+ <!-- =================================================================================================
+    STAGE 9
+    ================================================================================================= -->
+
+    <section id="stage9" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">Stage 9 – Non-Terminating by Ten Thousandths</h1>
+        <p class="mb-4 text-yellow-400">Match each decimal number with its equivalent fraction.</p>
+        
+        <div id="quiz-container-stage9">
+            <!-- Questions will be added here dynamically using JavaScript -->
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage9()">Submit Answers</button>
+    </section>
+ <!-- =================================================================================================
+    STAGE 10
+    ================================================================================================= -->
+    
+    <section id="stage10" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">Stage 10 – Mixed Non-Terminating</h1>
+        <p class="mb-4 text-yellow-400">Which of the following fractions is equivalent to each given non-terminating decimal?</p>
+        
+        <div id="quiz-container-stage10">
+            <!-- Questions will be added here dynamically using JavaScript -->
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersStage10()">Submit Answers</button>
+    </section>
+
+     <!-- =================================================================================================
+    QUIZ
+    ================================================================================================= -->
+    <section id="final-stage" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">QUIZ</h1>
+    
+        <!-- Questions will be added here dynamically using JavaScript -->
+        <div id="quiz-container-final">
+            <!-- Questions will be added here dynamically using JavaScript -->
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersFinalStage()">Submit Answers</button>
+    </section>
+    
+ <!-- =================================================================================================
+   SCRIPT
+    ================================================================================================= -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./auth//config.js"></script>
+    <script>
+        // Function to extract parameters from the URL
+        function getParametersFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const stage = urlParams.get('stage');
+            const username = urlParams.get('username');
+            return { stage, username };
+        }
+
+        // Get parameters from the URL
+        const { stage, username } = getParametersFromURL();
+
+        // Display the corresponding section based on the stage parameter
+        if (stage) {
+            const stageElement = document.getElementById(stage);
+            if (stageElement) {
+                stageElement.classList.remove('hidden');
+            }
+        }
+
+        // You can also display the username on the page if needed
+        if (username) {
+            // Display the username wherever you want on the page
+            console.log(`Hello, ${username}!`);
+        }
+    </script>
+    <script src="./script/game.js"></script>
+
+
+</body>
+</html>

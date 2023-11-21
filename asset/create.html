@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+        .bg-slider {
+            animation: slide 10s infinite alternate;
+        }
+
+        @keyframes slide {
+            0%, 20% {
+                opacity: 0.5;
+                transform: translateX(10px);
+            }
+
+            25%, 100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+    </style>
+</head>
+
+<body class="flex h-screen bg-gray-800 overflow-hidden">
+       <!-- Login Container -->
+       <div class="flex h-screen items-center shadow-lg justify-center p-1 w-full md:w-1/2 lg:w-3/6 bg-gray-900">
+      
+        <div class="w-full max-w-md justify-center items-center flex-col flex">
+            <div class="m-5">
+                <img src="./src/icon/LOGO.png" alt="" class="h-20">
+            </div>
+            <!-- Your login form goes here -->
+            <form class="w-3/4 pt-6 pb-8 mb-4" id="loginForm">
+                <div class="mb-10">
+                    <input
+                    class="mb-5 shadow appearance-none rounded-lg w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline outline-none border-white border-4 shadow-xl bg-gray-600 placeholder-gray-200 text-center"
+                    id="username" type="text" placeholder="Username" required autocomplete="username">
+                
+                    <input
+                    class="shadow appearance-none rounded-lg w-full py-2 px-3 text-white focus:outline-none focus:shadow-outline outline-none border-white border-4 shadow-xl bg-gray-600 placeholder-gray-200 text-center"
+                    id="age" type="number" value="" placeholder="Age" required autocomplete="age">
+                
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <button
+                        class="mb-2 bg-yellow-500 hover:bg-yellow-600 text-white w-1/2 font-bold py-2 px-4 rounded-lg hover:text-gray-300 focus:outline-none focus:shadow-outline"
+                        type="button" onclick="CreateAccount()">
+                        CREATE
+                    </button>
+                    <a href="connect.html" class="text-sm text-gray-500">Try to Play</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Background Slider -->
+    <div class="hidden h-screen md:flex bg-cover bg-center w-full md:w-1/2 lg:w-full bg-slider"
+        style="background-image: url('./src/bg/1.png');">
+    </div>
+
+ 
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./feature/auth/config.js"></script>
+    <script src="./feature/auth/create.js"></script>
+    <script>
+        // JavaScript to change the background image every 10 seconds
+        const backgroundSlider = document.querySelector('.bg-slider');
+        const images = [
+            './src/bg/1.png',
+            './src/bg/2.png'
+  
+        ];
+        let currentIndex = 0;
+
+        function changeBackground() {
+            backgroundSlider.style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        setInterval(changeBackground, 10000); // Change image every 10 seconds
+    </script>
+    
+</body>
+
+</html>

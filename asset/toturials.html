@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Your Website</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'NicoMoji';
+        src: url('./src/font/NicoMoji-Regular.ttf') format('truetype'); /* Replace with the actual path */
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .font-nico-moji {
+        font-family: 'NicoMoji', sans-serif;
+    }
+
+</style>
+<body class="bg-gray-800 overflow-auto w-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white py-4 px-2 md:px-16">
+        <div>
+            <img src="/asset/src/icon/LOGO.png" class="h-16">
+        </div>
+        <div>
+            
+        </div>
+       
+    </header>
+
+
+    <section class="py-4 px-5 md:px-16">
+        <h1 class="text-lg font-bold text-white mb-4">TUTORIAL AND LESSONS</h1>
+        <div class="bg-gray-700 p-2 rounded-md shadow-lg mb-4">
+            <button class="text-yellow-500 toggle-btn font-bold">How to Convert a Terminating Decimal to a Fraction</button>
+            <div class="content hidden mt-4">
+                <!-- Your content goes here -->
+                <div class="text-white">
+                    <br>Step 1: Determine the place value of the last digit in the decimal.
+                    <br>Step 2: Write the decimal as a fraction with a denominator that matches the place value of the last digit in the decimal from the previous step.
+                    <br>Step 3: Simplify the fraction into its simplest form.
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><div class="text-yellow-500">Terminating</div> 
+                    <br>Example for How to Convert a Terminating Decimal to a Fraction
+                    <br><br>Convert the terminating decimal 0.2 to a fraction in simplest form.
+                    <br>Step 1: First, we determine the place value of the last digit of the decimal, 2. The last digit is in the tenths place.
+                    <br>Step 2: Since the last digit of the decimal is in the tenths place, we write the fraction with a denominator of 10. When we write the decimal as a fraction, we no longer need the decimal point. Therefore, 0.2= 2/10
+                    <br>Step 3: Finally, we must simplify the fraction from the previous step until it is its simplest form.
+                    <br>2/10=(2÷2)/(10÷2)=1/5 (Divide the numerator and denominator by 2)
+                    <br>The decimal 0.24 is 6/25 as a fraction in simplest form.
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><br>Convert the terminating decimal 0.24 to a fraction in simplest form.
+                    <br>Step 1: First, we determine the place value of the last digit of the decimal, 4. The last digit is in the hundredths place.
+                    <br>Step 2: Since the last digit of the decimal is in the hundredths place, we write the fraction with a denominator of 100. When we write the decimal as a fraction, we no longer need the decimal point. Therefore, 0.24= 24/100
+                    <br>Step 3: Finally, we must simplify the fraction from the previous step until it is its simplest form.
+                    <br>24/100=(24÷4)/(100÷4)=6/25 (Divide the numerator and denominator by 4)
+                    <br>The decimal 0.24 is 6/25 as a fraction in simplest form.
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><br>Convert the terminating decimal 0.532 to a fraction in simplest form.
+                    <br>Step 1: First, we determine the place value of the last term in the terminating decimal. In this case, the last term, 2, is located in the thousandths place.
+                    <br>Step 2: Since the last term is in the thousandths place, we write the decimal as a fraction with a denominator of 1000.
+                    <br>0.532=532/1000
+                    <br>Step 3: Finally, we simplify the fraction from the previous step into its simplest form.
+                    <br>532/1000=(532÷4)/(1000÷4)=133/250 (Divide the numerator and denominator by 4)
+                    <br>Since 133 and 250 have no common factors other than 1, we can conclude the terminating decimal 0.532= 133/250 in simplest form.
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><br>Convert the terminating decimal 0.1224 to a fraction in simplest form.
+                    <br>Step 1: First, we determine the place value of the last digit of the decimal, 4. The last digit is in the ten thousandths place.
+                    <br>Step 2: Since the last digit of the decimal is in the ten thousandths place, we write the fraction with a denominator of 10000. When we write the decimal as a fraction, we no longer need the decimal point. Therefore, 0.1224= 1224/10000
+                    <br>Step 3: Finally, we must simplify the fraction from the previous step until it is its simplest form.
+                    <br>1224/10000=(1224÷8)/(10000÷8)=153/1250 (Divide the numerator and denominator by 8)
+                    <br>The decimal 0.1224 is 153/1250 as a fraction in simplest form.
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><br><div class="text-yellow-500">Non-terminating</div> 
+                    <br><br>There is an easy trick to convert a repeating decimal to the fraction form. Write the repeating digits as the numerator over the same number of 9s.
+                    <br>Repeating Decimal of the Form 0.(wxyz) ̅…
+                    <br>This is applicable only for repeating decimals having only repeating digits after the decimal point.
+                    <br>We can write a formula to convert such decimals to fractions as
+                    <br>0.(wxyz) ̅= (Repeated digits or digits)/(Number of 9^' s equal to the number of repeated digits)
+                    <br><br>Example 1: 0.(2222) ̅…= 2/9
+                    <br>There is only 1 repeating digit, 2. So, the denominator will be 9.
+                    <br><br>Example 2: 0.(3232) ̅…= 32/99
+                    <br>There are 2 repeating digits, 3 and 2. So, the numerator will be 32, and two 9’s or 99 will come in the denominator.
+                    <br><br>Example 3: 0.(9999) ̅…= 9/9=1
+                    <div class="bg-gray-600 h-0.5 m-2"></div>
+                    <br><br>To convert a decimal to a mixed number, perform these steps:
+                    <br>Step 1: Determine how many decimal places are in the given number.
+                    <br>Step 2: Remove the decimal point from the number and divide it by a power of ten equal to the number of decimal places. So, if there are two decimal places, we must divide the number by 102, which is 100. To put it another way, the number of zeros should be equal to the number of decimal places.
+                    <br>Step 3: Simplify the fraction and, if necessary, convert it to a mixed number if it is an improper fraction.
+                    <br><br>Example 1: Convert 7.5 to mixed fraction.
+                    <br><br>To convert a decimal to a mixed number, perform these steps:
+                    <br>Step 1: Determine how many decimal places are in the given number.
+                    <br>Step 2: Remove the decimal point from the number and divide it by a power of ten equal to the number of decimal places. So, if there are two decimal places, we must divide the number by 10^2, which is 100. To put it another way, the number of zeros should be equal to the number of decimal places. Take away the decimal point, Rewrite in fraction form,
+                    <br>7.5 = 75/10
+                    <br>Step 3: Simplify the fraction and, if necessary, convert it to a mixed number if it is an improper fraction.
+                    <br>Thus, 7.5 = 75/10 (Divide the numerator and denominator by 5)
+                    <br>=15/2, now convert it into a mixed number by simplifying,
+                    <br>Here, we simplify 15/2 in a mixed fraction 7 1/2, here 7 is quotient and 1 remainder.
+                    <br>Therefore, 7.5 = 15/2 = 7 1/2 in a mixed fraction.
+                    <br><br>Example 2: Convert 3.25 into a mixed fraction?
+                    <br>We will use steps to convert a decimal to a fraction.
+                    <br>Step 1: Determine the place value of the digits after the decimal in the number, if there is 1 digit after the decimal then divide it by 10 and two digits divide by 100 and so on.
+                    <br>Step 2: Use it to figure out what the fraction’s denominator is 100.
+                    <br>Step 3: Take away the decimal point. Rewrite it in fraction form, then simplify it,
+                    <br>Numerator/Denominator = 325/100
+                    <br>Step 4: Express it in terms of the smallest Simplest Fraction: 325/100
+                    <br>Thus, 3.25 = 325/100 (Divide the numerator and denominator by 5)
+                    <br>= 65/20 (Divide the numerator and denominator by 5)
+                    <br>= 13/4 is an improper fraction.
+                    <br>Therefore, convert 13/4 in a mixed fraction,
+                    <br>13/4 = 4 1/3
+                    <br>So, 3.25 in a mixed fraction will be 4 1/3
+                    <br><br>Example 3: Convert 9.745 into a mixed fraction?
+                    <br>Step 1: Determine the place value of the digits after the decimal in the number, if there is 1 digit after the decimal then divide it by 10 and two digits divide by 100 and so on.
+                    <br>Step 2: Use it to figure out what the fraction’s denominator is 1000.
+                    <br>Step 3: Take away the decimal point. Rewrite it in fraction form, then simplify it.
+                    <br>Numerator/Denominator = 9745/1000
+                    <br>Step 4: Express it in terms of the smallest Simplest Fraction: 9745/1000
+                    <br>Thus, 9.745 = 9745/1000 (Divide the numerator and denominator by 5)
+                    <br>= 1949/200
+                    <br>Now convert into a mixed fraction,
+                    <br>Therefore, 9.745 = 1949/200 = 9 149/200
+                    <br><br>Example 4: Convert 3.3975 into a mixed fraction?
+                    <br>Step 1: Determine the place value of the digits after the decimal in the number, if there is 1 digit after the decimal then divide it by 10 and two digits divide by 100 and so on.
+                    <br>Step 2: Use it to figure out what the fraction’s denominator is 10000.
+                    <br>Step 3: Take away the decimal point. Rewrite it in fraction form, then simplify it.
+                    <br>Numerator/Denominator = 33975/10000
+                    <br>Step 4: Express it in terms of the smallest Simplest Fraction: 33975/10000
+                    <br>Thus, 3.3975 = 33975/10000 (Divide the numerator and denominator by 25)
+                    <br>= 1359/400
+                    <br>Now convert into a mixed fraction,
+                    <br>Therefore, 3.3975 = 1359/400 = 3 159/400</div>
+            </div>
+        </div>
+    
+        <div class="bg-gray-700 p-2 rounded-md shadow-lg mb-4">
+            <button class="text-yellow-500 toggle-btn font-bold">Converting Non-Terminating Decimals to Mixed Fractions</button>
+            <div class="content hidden mt-4">
+                <!-- Your additional content goes here -->
+                <div class="text-white">A non-terminating but recurring decimal number can be converted to its rational number equivalent as
+                    <br>Step 1: Assume the repeating decimal to be equal to some variable x.
+                    <br>Step 2: Write the number without using a bar and equal to x.
+                    <br>Step 3: Determine the number of digits having a bar on their heads or the number of digits before the bar for mixed recurring decimal.
+                    <br>Step 4: If the repeating number is the same digit after the decimal such as 0.333333… then multiply by 10, if repetition of the digits is in pairs of two numbers such as 0.252525… then multiply by 100 and so on
+                    <br>Step 5: Subtract the equation formed by step 2 and step 4.
+                    <br>Step 6: Find the value of x in the simplest form.
+                    <br><br>Example 1: Convert 1.343434… or =1.(34) ̅ to a rational number.
+                    <br>Step 1: Let x=1.343434…
+                    <br>Since 2 digit is repeated multiply both sides by 100
+                    <br>100 x x = 100 x 1.343434…
+                    <br>Step 2: 100x = 134.343434…
+                    <br>Subtract whole number by 1.
+                    <br>99x = 133 (divide both sides by 99)
+                    <br>X= 133/99
+                    <br>Therefore, 1.343434… or 1.(34) ̅ = 133/99 = 1 34/99
+                    <br><br>Example 2: Convert 6.27454545… or =6.27(45) ̅ to a rational number.
+                    <br>Step 1: Let x=6.27454545…
+                    <br>Since 2 numbers 2 and 7 are not repeated, therefore, multiply both sides by 100.
+                    <br>100 x x = 100 x 6.27454545…
+                    <br>Step 2: 100x = 627.454545…
+                    <br>Also, 2 numbers 4 and 5 are repeating, therefore, multiply both sides by 100.
+                    <br>100 x 100x = 100 x 627.454545…
+                    <br>Step 3: 10000x = 62745.454545…
+                    <br>Now, subtract left side by 100 and the right side by 627.
+                    <br>We have, 9900x = 62118 (divide both sides by 9900)
+                    <br>X= 62118/9900 (lowest term, divide both sides by 2)
+                    <br>X= 31059/4950
+                    <br>Therefore, 6.27454545… or 6.27(45) ̅ = 31059/4950 = 6 1359/4950</div>
+            </div>
+        </div>
+
+        
+    </section>
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            toggleBtns.forEach(function (toggleBtn) {
+                toggleBtn.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    content.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

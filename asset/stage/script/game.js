@@ -44,21 +44,22 @@ function checkAnswers() {
     // Update Firebase database
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function (currentCoin) {
-        return (+currentCoin - 1 || 0) + 300;
-    });
+
 
     // Display result in modal
     if (correctCount === decimalNumbers.length) {
         displayResult(`You got a perfect score! 500 coins added to your account.`);
+            // Add 300 coins to the existing amount
+            playerInfoRef.child("coin").transaction(function (currentCoin) {
+                return (+currentCoin || 0) + 300;
+            });
+
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (150 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function (currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         displayResult(`You got ${correctCount} out of ${decimalNumbers.length} correct. You received a reward of ${randomReward} coins!`);
@@ -128,10 +129,7 @@ function displayResult(message) {
             "stage2max": stage2max,
         });
 
-        // Add 500 coins to the existing amount
-        playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + 600;
-        });
+       
 
         displayResultStage2(correctCountStage2);
     }
@@ -140,17 +138,21 @@ function displayResult(message) {
     function displayResultStage2(correctCountStage2) {
         const modal = document.getElementById('modal');
         const modalContent = document.getElementById('modal-content');
-
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         // Check if the user got a perfect score
         if (correctCountStage2 === decimalNumbersStage2.length) {
             modalContent.textContent = `You got a perfect score! 600 coins added to your account.`;
+             // Add 500 coins to the existing amount
+            playerInfoRef.child("coin").transaction(function(currentCoin) {
+                return (+currentCoin || 0) + 600;
+            });
         } else {
             // Generate a random reward between 100 and 200 coins
             const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
             // Add the random reward to the existing amount
-            const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+           
             playerInfoRef.child("coin").transaction(function(currentCoin) {
-                return (+currentCoin - 1 || 0) + randomReward;
+                return (+currentCoin || 0) + randomReward;
             });
 
             modalContent.textContent = `You got ${correctCountStage2} out of ${decimalNumbersStage2.length} correct. You received a reward of ${randomReward} coins!`;
@@ -227,11 +229,6 @@ function checkAnswersStage3() {
         "stage3max": stage3max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 900;
-    });
-
     displayResultStage3(correctCountStage3);
 }
 
@@ -239,17 +236,22 @@ function checkAnswersStage3() {
 function displayResultStage3(correctCountStage3) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
     // Check if the user got a perfect score
     if (correctCountStage3 === decimalNumbersStage3.length) {
         modalContent.textContent = `You got a perfect score! 900 coins added to your account.`;
+            // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 900;
+    });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+       
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage3} out of ${decimalNumbersStage3.length} correct. You received a reward of ${randomReward} coins!`;
@@ -331,10 +333,7 @@ function checkAnswersStage4() {
         "stage4max": stage4max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1000;
-    });
+
 
     displayResultStage4(correctCountStage4);
 }
@@ -343,17 +342,21 @@ function checkAnswersStage4() {
 function displayResultStage4(correctCountStage4) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage4 === decimalNumbersStage4.length) {
+                // Add 500 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1000;
+        });
         modalContent.textContent = `You got a perfect score! 1000 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+      
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage4} out of ${decimalNumbersStage4.length} correct. You received a reward of ${randomReward} coins!`;
@@ -502,10 +505,7 @@ function checkAnswersStage5() {
         "stage5max": stage5max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1200;
-    });
+
 
     displayResultStage5(correctCountStage5);
 }
@@ -514,17 +514,21 @@ function checkAnswersStage5() {
 function displayResultStage5(correctCountStage5) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage5 === decimalQuestionsStage5.length) {
+            // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 1200;
+    });
         modalContent.textContent = `You got a perfect score! 1200 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage5} out of ${decimalQuestionsStage5.length} correct. You received a reward of ${randomReward} coins!`;
@@ -583,10 +587,7 @@ function checkAnswersStage6() {
         "stage6max": stage6max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1500;
-    });
+
 
     displayResultStage6(correctCountStage6);
 }
@@ -595,17 +596,21 @@ function checkAnswersStage6() {
 function displayResultStage6(correctCountStage6) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage6 === decimalNumbersStage6.length) {
+            // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 1500;
+    });
         modalContent.textContent = `You got a perfect score! 1500 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+     
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage6} out of ${decimalNumbersStage6.length} correct. You received a reward of ${randomReward} coins!`;
@@ -664,10 +669,7 @@ function checkAnswersStage7() {
         "stage7max": stage7max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1600;
-    });
+
 
     displayResultStage7(correctCountStage7);
 }
@@ -676,17 +678,22 @@ function checkAnswersStage7() {
 function displayResultStage7(correctCountStage7) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
     // Check if the user got a perfect score
     if (correctCountStage7 === decimalNumbersStage7.length) {
+            // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 1600;
+    });
         modalContent.textContent = `You got a perfect score! 1600 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+ 
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage7} out of ${decimalNumbersStage7.length} correct. You received a reward of ${randomReward} coins!`;
@@ -778,10 +785,6 @@ function checkAnswersStage8() {
         "stage8max": stage8max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1800;
-    });
 
     displayResultStage8(correctCountStage8);
 }
@@ -790,17 +793,22 @@ function checkAnswersStage8() {
 function displayResultStage8(correctCountStage8) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage8 === decimalNumbersStage8.length) {
+        
+    // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 1800;
+    });
         modalContent.textContent = `You got a perfect score! 1800 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+ 
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage8} out of ${decimalNumbersStage8.length} correct. You received a reward of ${randomReward} coins!`;
@@ -907,9 +915,7 @@ function checkAnswersStage9() {
     });
 
     // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 1900;
-    });
+
 
     displayResultStage9(correctCountStage9);
 }
@@ -918,17 +924,20 @@ function checkAnswersStage9() {
 function displayResultStage9(correctCountStage9) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage9 === decimalNumbersStage9.length) {
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1900;
+        });
         modalContent.textContent = `You got a perfect score! 1900 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage9} out of ${decimalNumbersStage9.length} correct. You received a reward of ${randomReward} coins!`;
@@ -1075,10 +1084,7 @@ function checkAnswersStage10() {
         "stage10max": stage10max,
     });
 
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 2000;
-    });
+
 
     displayResultStage10(correctCountStage10);
 }
@@ -1087,17 +1093,21 @@ function checkAnswersStage10() {
 function displayResultStage10(correctCountStage10) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountStage10 === decimalQuestionsStage10.length) {
+            // Add 500 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 2000;
+    });
         modalContent.textContent = `You got a perfect score! 2000 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage10} out of ${decimalQuestionsStage10.length} correct. You received a reward of ${randomReward} coins!`;
@@ -1270,10 +1280,7 @@ function checkAnswersFinalStage() {
         "stagefinalmax": finalStageMax,
     });
 
-    // Add 1000 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin - 1 || 0) + 5000;
-    });
+
 
     displayResultFinalStage(correctCountFinalStage);
 }
@@ -1282,17 +1289,21 @@ function checkAnswersFinalStage() {
 function displayResultFinalStage(correctCountFinalStage) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
-
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Check if the user got a perfect score
     if (correctCountFinalStage === decimalQuestionsFinalStage.length) {
+            // Add 1000 coins to the existing amount
+    playerInfoRef.child("coin").transaction(function(currentCoin) {
+        return (+currentCoin || 0) + 5000;
+    });
         modalContent.textContent = `Congratulations! You got a perfect score in final stage! 5000 coins added to your account.`;
     } else {
         // Generate a random reward between 200 and 300 coins
         const randomReward = Math.floor(Math.random() * (300 - 200 + 1) + 200);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin - 1 || 0) + randomReward;
+            return (+currentCoin || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountFinalStage} out of ${decimalQuestionsFinalStage.length} correct. You received a reward of ${randomReward} coins!`;

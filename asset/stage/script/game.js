@@ -1,4 +1,4 @@
-const { stageplayer, usernameplayer } = getParametersFromURL();
+
 //=================================================================================================
 //     STAGE 1
 //=================================================================================================
@@ -42,7 +42,7 @@ function checkAnswers() {
     stage1max = decimalNumbers.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function (currentCoin) {
@@ -56,7 +56,7 @@ function checkAnswers() {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (150 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function (currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -122,7 +122,7 @@ function displayResult(message) {
         stage2max = decimalNumbersStage2.length * 100; // Assuming each question is worth 100 points
 
         // Update Firebase database
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.update({
             "stage2pts": stage2pts,
             "stage2max": stage2max,
@@ -148,7 +148,7 @@ function displayResult(message) {
             // Generate a random reward between 100 and 200 coins
             const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
             // Add the random reward to the existing amount
-            const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+            const playerInfoRef = firebase.database().ref(`player_info/${username}`);
             playerInfoRef.child("coin").transaction(function(currentCoin) {
                 return (currentCoin || 0) + randomReward;
             });
@@ -221,7 +221,7 @@ function checkAnswersStage3() {
     stage3max = decimalNumbersStage3.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
         "stage3pts": stage3pts,
         "stage3max": stage3max,
@@ -247,7 +247,7 @@ function displayResultStage3(correctCountStage3) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -325,7 +325,7 @@ function checkAnswersStage4() {
     stage4max = decimalNumbersStage4.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
         "stage4pts": stage4pts,
         "stage4max": stage4max,
@@ -351,7 +351,7 @@ function displayResultStage4(correctCountStage4) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -495,7 +495,7 @@ function checkAnswersStage5() {
     // Calculate points and max for Stage 5
     stage5pts = correctCountStage5 * 100; // Assuming each correct answer gives 100 points
     stage5max = decimalQuestionsStage5.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage5pts": stage5pts,
@@ -522,7 +522,7 @@ function displayResultStage5(correctCountStage5) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -576,7 +576,7 @@ function checkAnswersStage6() {
     // Calculate points and max for Stage 6
     stage6pts = correctCountStage6 * 100; // Assuming each correct answer gives 100 points
     stage6max = decimalNumbersStage6.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage6pts": stage6pts,
@@ -603,7 +603,7 @@ function displayResultStage6(correctCountStage6) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -657,7 +657,7 @@ function checkAnswersStage7() {
     // Calculate points and max for Stage 7
     stage7pts = correctCountStage7 * 100; // Assuming each correct answer gives 100 points
     stage7max = decimalNumbersStage7.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage7pts": stage7pts,
@@ -684,7 +684,7 @@ function displayResultStage7(correctCountStage7) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -771,7 +771,7 @@ function checkAnswersStage8() {
     stage8pts = correctCountStage8 * 100; // Assuming each correct answer gives 100 points
     stage8max = decimalNumbersStage8.length * 100; // Assuming each question is worth 100 points
 
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage8pts": stage8pts,
@@ -798,7 +798,7 @@ function displayResultStage8(correctCountStage8) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -899,7 +899,7 @@ function checkAnswersStage9() {
     // Calculate points and max for Stage 9
     stage9pts = correctCountStage9 * 100; // Assuming each correct answer gives 100 points
     stage9max = decimalNumbersStage9.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage9pts": stage9pts,
@@ -926,7 +926,7 @@ function displayResultStage9(correctCountStage9) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -1068,7 +1068,7 @@ function checkAnswersStage10() {
     // Calculate points and max for Stage 10
     stage10pts = correctCountStage10 * 100; // Assuming each correct answer gives 100 points
     stage10max = decimalQuestionsStage10.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stage10pts": stage10pts,
@@ -1095,7 +1095,7 @@ function displayResultStage10(correctCountStage10) {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });
@@ -1263,7 +1263,7 @@ function checkAnswersFinalStage() {
     // Calculate points and max for the final stage
     finalStagePts = correctCountFinalStage * 100; // Assuming each correct answer gives 100 points
     finalStageMax = decimalQuestionsFinalStage.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
     playerInfoRef.update({
         "stagefinalpts": finalStagePts,
@@ -1290,7 +1290,7 @@ function displayResultFinalStage(correctCountFinalStage) {
         // Generate a random reward between 200 and 300 coins
         const randomReward = Math.floor(Math.random() * (300 - 200 + 1) + 200);
         // Add the random reward to the existing amount
-        const playerInfoRef = firebase.database().ref(`player_info/${usernameplayer}`);
+        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (currentCoin || 0) + randomReward;
         });

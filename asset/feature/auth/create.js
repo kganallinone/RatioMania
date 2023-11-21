@@ -59,7 +59,7 @@ function CreateAccount() {
                     overallpts: '0',
                     overallmax: '0',
                     rank: '0',
-                    coin: '0'
+                    coin: '200'
                 });
             }
         })

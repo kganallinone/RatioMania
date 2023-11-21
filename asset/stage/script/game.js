@@ -46,7 +46,7 @@ function checkAnswers() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function (currentCoin) {
-        return (+currentCoin || 0) + 300;
+        return (+currentCoin - 1 || 0) + 300;
     });
 
     // Display result in modal
@@ -58,7 +58,7 @@ function checkAnswers() {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function (currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         displayResult(`You got ${correctCount} out of ${decimalNumbers.length} correct. You received a reward of ${randomReward} coins!`);
@@ -130,7 +130,7 @@ function displayResult(message) {
 
         // Add 500 coins to the existing amount
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + 600;
+            return (+currentCoin - 1 || 0) + 600;
         });
 
         displayResultStage2(correctCountStage2);
@@ -150,7 +150,7 @@ function displayResult(message) {
             // Add the random reward to the existing amount
             const playerInfoRef = firebase.database().ref(`player_info/${username}`);
             playerInfoRef.child("coin").transaction(function(currentCoin) {
-                return (+currentCoin || 0) + randomReward;
+                return (+currentCoin - 1 || 0) + randomReward;
             });
 
             modalContent.textContent = `You got ${correctCountStage2} out of ${decimalNumbersStage2.length} correct. You received a reward of ${randomReward} coins!`;
@@ -229,7 +229,7 @@ function checkAnswersStage3() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 900;
+        return (+currentCoin - 1 || 0) + 900;
     });
 
     displayResultStage3(correctCountStage3);
@@ -249,7 +249,7 @@ function displayResultStage3(correctCountStage3) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage3} out of ${decimalNumbersStage3.length} correct. You received a reward of ${randomReward} coins!`;
@@ -333,7 +333,7 @@ function checkAnswersStage4() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1000;
+        return (+currentCoin - 1 || 0) + 1000;
     });
 
     displayResultStage4(correctCountStage4);
@@ -353,7 +353,7 @@ function displayResultStage4(correctCountStage4) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage4} out of ${decimalNumbersStage4.length} correct. You received a reward of ${randomReward} coins!`;
@@ -504,7 +504,7 @@ function checkAnswersStage5() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1200;
+        return (+currentCoin - 1 || 0) + 1200;
     });
 
     displayResultStage5(correctCountStage5);
@@ -524,7 +524,7 @@ function displayResultStage5(correctCountStage5) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage5} out of ${decimalQuestionsStage5.length} correct. You received a reward of ${randomReward} coins!`;
@@ -585,7 +585,7 @@ function checkAnswersStage6() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1500;
+        return (+currentCoin - 1 || 0) + 1500;
     });
 
     displayResultStage6(correctCountStage6);
@@ -605,7 +605,7 @@ function displayResultStage6(correctCountStage6) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage6} out of ${decimalNumbersStage6.length} correct. You received a reward of ${randomReward} coins!`;
@@ -666,7 +666,7 @@ function checkAnswersStage7() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1600;
+        return (+currentCoin - 1 || 0) + 1600;
     });
 
     displayResultStage7(correctCountStage7);
@@ -686,7 +686,7 @@ function displayResultStage7(correctCountStage7) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage7} out of ${decimalNumbersStage7.length} correct. You received a reward of ${randomReward} coins!`;
@@ -780,7 +780,7 @@ function checkAnswersStage8() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1800;
+        return (+currentCoin - 1 || 0) + 1800;
     });
 
     displayResultStage8(correctCountStage8);
@@ -800,7 +800,7 @@ function displayResultStage8(correctCountStage8) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage8} out of ${decimalNumbersStage8.length} correct. You received a reward of ${randomReward} coins!`;
@@ -908,7 +908,7 @@ function checkAnswersStage9() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1900;
+        return (+currentCoin - 1 || 0) + 1900;
     });
 
     displayResultStage9(correctCountStage9);
@@ -928,7 +928,7 @@ function displayResultStage9(correctCountStage9) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage9} out of ${decimalNumbersStage9.length} correct. You received a reward of ${randomReward} coins!`;
@@ -1077,7 +1077,7 @@ function checkAnswersStage10() {
 
     // Add 500 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 2000;
+        return (+currentCoin - 1 || 0) + 2000;
     });
 
     displayResultStage10(correctCountStage10);
@@ -1097,7 +1097,7 @@ function displayResultStage10(correctCountStage10) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountStage10} out of ${decimalQuestionsStage10.length} correct. You received a reward of ${randomReward} coins!`;
@@ -1272,7 +1272,7 @@ function checkAnswersFinalStage() {
 
     // Add 1000 coins to the existing amount
     playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 5000;
+        return (+currentCoin - 1 || 0) + 5000;
     });
 
     displayResultFinalStage(correctCountFinalStage);
@@ -1292,7 +1292,7 @@ function displayResultFinalStage(correctCountFinalStage) {
         // Add the random reward to the existing amount
         const playerInfoRef = firebase.database().ref(`player_info/${username}`);
         playerInfoRef.child("coin").transaction(function(currentCoin) {
-            return (+currentCoin || 0) + randomReward;
+            return (+currentCoin - 1 || 0) + randomReward;
         });
 
         modalContent.textContent = `You got ${correctCountFinalStage} out of ${decimalQuestionsFinalStage.length} correct. You received a reward of ${randomReward} coins!`;

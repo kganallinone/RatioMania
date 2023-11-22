@@ -48,7 +48,7 @@ function checkAnswers() {
 
     // Display result in modal
     if (correctCount === decimalNumbers.length) {
-        displayResult(`You got a perfect score! 500 coins added to your account.`);
+        displayResult(`You got a perfect score! 300 coins added to your account.`);
             // Add 300 coins to the existing amount
             playerInfoRef.child("coin").transaction(function (currentCoin) {
                 return (+currentCoin || 0) + 300;

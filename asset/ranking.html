@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brilliance Ranking</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-800 w-full">
+    <header class="bg-gray-900 text-white py-4 px-16 md:px-16 flex justify-between items-center">
+        <div>
+            <img src="/asset/src/icon/LOGO.png" class="h-16">
+        </div>
+        <div>
+            <!-- Back button -->
+            <button onclick="goBack()" class="text-white">Back</button>
+        </div>
+    </header>
+    <div class="w-full p-8 rounded-lg px-16">
+        <h1 class="text-3xl text-white font-bold mb-6">Brilliance Ranking</h1>
+        <div id="ranking-list" class="w-full justify-center"></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="./feature/auth/config.js"></script>
+    <script>
+        // Fetch player data from the database
+        var allplayerDataRef = firebase.database().ref("player_info");
+
+        allplayerDataRef.once("value").then(function(snapshot) {
+            var playerData = snapshot.val();
+
+            // Function to display all players by rank
+            function displayAllPlayersByRank(playerData) {
+                var players = Object.values(playerData);
+
+                // Sort players based on rank in ascending order
+                players.sort(function(a, b) {
+                    return parseInt(a.rank) - parseInt(b.rank);
+                });
+
+                // Display the ranking list
+                displayRankingList(players);
+            }
+
+            // Function to display the ranking list
+            function displayRankingList(players) {
+    var rankingListContainer = document.getElementById('ranking-list');
+
+    players.forEach(function(player) {
+        var playerContainer = document.createElement('div');
+        playerContainer.classList.add('p-4', 'bg-gray-900', 'rounded-md', 'mb-4', 'flex', 'justify-between', 'items-center');
+
+        // Left side of the container
+        var playerInfoLeft = document.createElement('div');
+
+        // Span for "RANK" text
+        var rankSpan = document.createElement('span');
+        rankSpan.textContent = `RANK ${player.rank}`;
+        rankSpan.classList.add('text-white', 'bg-blue-500', 'px-2', 'py-1', 'rounded-md', 'mr-2');
+        playerInfoLeft.appendChild(rankSpan);
+
+        // Span for username
+        var usernameSpan = document.createElement('span');
+        usernameSpan.textContent = player.username;
+        usernameSpan.classList.add('text-white', 'font-bold', 'mr-2');
+        playerInfoLeft.appendChild(usernameSpan);
+
+        playerContainer.appendChild(playerInfoLeft);
+
+        // Right side of the container
+        var playerInfoRight = document.createElement('div');
+
+        // Icon for brilliance points
+        var brillianceIcon = document.createElement('i');
+        brillianceIcon.classList.add('material-icons', 'text-yellow-500', 'mr-2');
+        brillianceIcon.textContent = 'lightbulb_outline';
+        playerInfoRight.appendChild(brillianceIcon);
+
+        // Span for brilliance points
+        var brillianceSpan = document.createElement('span');
+        brillianceSpan.textContent = `${player.brilliance_pts || 0}`;
+        brillianceSpan.classList.add('text-yellow-100');
+        playerInfoRight.appendChild(brillianceSpan);
+
+        playerContainer.appendChild(playerInfoRight);
+
+        rankingListContainer.appendChild(playerContainer);
+    });
+}
+
+
+
+            // Display all players by rank
+            displayAllPlayersByRank(playerData);
+        });
+    </script>
+        <script>
+            // JavaScript function to go back
+            function goBack() {
+                // Get the current URL
+                const currentURL = window.location.href;
+        
+                // Extract the username from the URL
+                const usernameMatch = currentURL.match(/username=([^&]*)/);
+                const username = usernameMatch && usernameMatch[1];
+        
+                // Send the username to another page (replace 'target_page.html' with the actual target page)
+                if (username) {
+                    window.location.href = `dashboard.html?username=${username}`;
+                } else {
+                    // If username is not found, simply go back
+                    window.history.back();
+                }
+            }
+        </script>
+</body>
+</html>

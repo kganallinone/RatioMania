@@ -25,8 +25,9 @@ function generateQuiz() {
 // Function to check answers and update database
 function checkAnswers() {
     let correctCount = 0;
-    let stage1pts = 0;
-    let stage1max = 0;
+    let brilliancePts = 0;
+    let stage1Pts = 0;
+    let stage1Max = 0;
 
     decimalNumbers.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answer${index}`).value.trim();
@@ -34,25 +35,31 @@ function checkAnswers() {
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswers[index]) {
             correctCount++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePts += 50;
         }
     });
 
     // Calculate points and max for Stage 1
-    stage1pts = correctCount * 100; // Assuming each correct answer gives 100 points
-    stage1max = decimalNumbers.length * 100; // Assuming each question is worth 100 points
+    stage1Pts = correctCount * 100; // Assuming each correct answer gives 100 points
+    stage1Max = decimalNumbers.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
-
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePts;
+    });
 
     // Display result in modal
     if (correctCount === decimalNumbers.length) {
-        displayResult(`You got a perfect score! 300 coins added to your account.`);
-            // Add 300 coins to the existing amount
-            playerInfoRef.child("coin").transaction(function (currentCoin) {
-                return (+currentCoin || 0) + 300;
-            });
+        displayResult(`You got a perfect score! 300 coins added to your account. Brilliance Points: ${brilliancePts}`);
+        // Add 300 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function (currentCoin) {
+            return (+currentCoin || 0) + 300;
+        });
 
     } else {
         // Generate a random reward between 100 and 200 coins
@@ -62,7 +69,7 @@ function checkAnswers() {
             return (+currentCoin || 0) + randomReward;
         });
 
-        displayResult(`You got ${correctCount} out of ${decimalNumbers.length} correct. You received a reward of ${randomReward} coins!`);
+        displayResult(`You got ${correctCount} out of ${decimalNumbers.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePts}`);
     }
 }
 
@@ -74,6 +81,7 @@ function displayResult(message) {
     modalContent.textContent = message;
     modal.classList.remove('hidden');
 }
+
 
 
 
@@ -103,63 +111,71 @@ function displayResult(message) {
         });
     }
 
-    // Function to check answers for Stage 2
-    function checkAnswersStage2() {
-        let correctCountStage2 = 0;
-        let stage2pts = 0;
-        let stage2max = 0;
+  // Function to check answers for Stage 2
+function checkAnswersStage2() {
+    let correctCountStage2 = 0;
+    let brilliancePtsStage2 = 0;
+    let stage2Pts = 0;
+    let stage2Max = 0;
 
-        decimalNumbersStage2.forEach((decimal, index) => {
-            const userAnswer = document.getElementById(`answerStage2${index}`).value.trim();
-            
-            // Compare user's answer with correct answer
-            if (userAnswer === correctAnswersStage2[index]) {
-                correctCountStage2++;
-            }
-        });
+    decimalNumbersStage2.forEach((decimal, index) => {
+        const userAnswer = document.getElementById(`answerStage2${index}`).value.trim();
 
-        // Calculate points and max for Stage 2
-        stage2pts = correctCountStage2 * 100; // Assuming each correct answer gives 100 points
-        stage2max = decimalNumbersStage2.length * 100; // Assuming each question is worth 100 points
+        // Compare user's answer with correct answer
+        if (userAnswer === correctAnswersStage2[index]) {
+            correctCountStage2++;
 
-        // Update Firebase database
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
-        playerInfoRef.update({
-            "stage2pts": stage2pts,
-            "stage2max": stage2max,
-        });
-
-       
-
-        displayResultStage2(correctCountStage2);
-    }
-
-    // Function to display result in modal for Stage 2
-    function displayResultStage2(correctCountStage2) {
-        const modal = document.getElementById('modal');
-        const modalContent = document.getElementById('modal-content');
-        const playerInfoRef = firebase.database().ref(`player_info/${username}`);
-        // Check if the user got a perfect score
-        if (correctCountStage2 === decimalNumbersStage2.length) {
-            modalContent.textContent = `You got a perfect score! 600 coins added to your account.`;
-             // Add 500 coins to the existing amount
-            playerInfoRef.child("coin").transaction(function(currentCoin) {
-                return (+currentCoin || 0) + 600;
-            });
-        } else {
-            // Generate a random reward between 100 and 200 coins
-            const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
-            // Add the random reward to the existing amount
-           
-            playerInfoRef.child("coin").transaction(function(currentCoin) {
-                return (+currentCoin || 0) + randomReward;
-            });
-
-            modalContent.textContent = `You got ${correctCountStage2} out of ${decimalNumbersStage2.length} correct. You received a reward of ${randomReward} coins!`;
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage2 += 50;
         }
+    });
 
-        modal.classList.remove('hidden');
+    // Calculate points and max for Stage 2
+    stage2Pts = correctCountStage2 * 100; // Assuming each correct answer gives 100 points
+    stage2Max = decimalNumbersStage2.length * 100; // Assuming each question is worth 100 points
+
+    // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    playerInfoRef.update({
+        "stage2pts": stage2Pts,
+        "stage2max": stage2Max,
+    });
+
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage2;
+    });
+
+    displayResultStage2(correctCountStage2, brilliancePtsStage2);
+}
+
+// Function to display result in modal for Stage 2
+function displayResultStage2(correctCountStage2, brilliancePtsStage2) {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
+    // Check if the user got a perfect score
+    if (correctCountStage2 === decimalNumbersStage2.length) {
+        modalContent.textContent = `You got a perfect score! 600 coins added to your account. Brilliance Points: ${brilliancePtsStage2}`;
+        // Add 600 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 600;
+        });
+    } else {
+        // Generate a random reward between 100 and 200 coins
+        const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
+        // Add the random reward to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + randomReward;
+        });
+
+        modalContent.textContent = `You got ${correctCountStage2} out of ${decimalNumbersStage2.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage2}`;
     }
+
+    modal.classList.remove('hidden');
+}
+
 //=================================================================================================
 //     STAGE 3
 //=================================================================================================
@@ -205,8 +221,9 @@ function displayResult(message) {
 // Function to check answers for Stage 3
 function checkAnswersStage3() {
     let correctCountStage3 = 0;
-    let stage3pts = 0;
-    let stage3max = 0;
+    let brilliancePtsStage3 = 0;
+    let stage3Pts = 0;
+    let stage3Max = 0;
 
     decimalNumbersStage3.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage3${index}`).value.trim();
@@ -215,51 +232,57 @@ function checkAnswersStage3() {
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswer) {
             correctCountStage3++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage3 += 50;
         }
     });
 
     // Calculate points and max for Stage 3
-    stage3pts = correctCountStage3 * 100; // Assuming each correct answer gives 100 points
-    stage3max = decimalNumbersStage3.length * 100; // Assuming each question is worth 100 points
+    stage3Pts = correctCountStage3 * 100; // Assuming each correct answer gives 100 points
+    stage3Max = decimalNumbersStage3.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage3pts": stage3pts,
-        "stage3max": stage3max,
+        "stage3pts": stage3Pts,
+        "stage3max": stage3Max,
     });
 
-    displayResultStage3(correctCountStage3);
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage3;
+    });
+
+    displayResultStage3(correctCountStage3, brilliancePtsStage3);
 }
 
 // Function to display result in modal for Stage 3
-function displayResultStage3(correctCountStage3) {
+function displayResultStage3(correctCountStage3, brilliancePtsStage3) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
     // Check if the user got a perfect score
     if (correctCountStage3 === decimalNumbersStage3.length) {
-        modalContent.textContent = `You got a perfect score! 900 coins added to your account.`;
-            // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 900;
-    });
+        modalContent.textContent = `You got a perfect score! 900 coins added to your account. Brilliance Points: ${brilliancePtsStage3}`;
+        // Add 900 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 900;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-       
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage3} out of ${decimalNumbersStage3.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage3} out of ${decimalNumbersStage3.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage3}`;
     }
 
     modal.classList.remove('hidden');
 }
-
 
    
 //=================================================================================================
@@ -306,11 +329,12 @@ function displayResultStage3(correctCountStage3) {
       });
   }
 
-  // Function to check answers for Stage 4
+// Function to check answers for Stage 4
 function checkAnswersStage4() {
     let correctCountStage4 = 0;
-    let stage4pts = 0;
-    let stage4max = 0;
+    let brilliancePtsStage4 = 0;
+    let stage4Pts = 0;
+    let stage4Max = 0;
 
     decimalNumbersStage4.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage4${index}`).value.trim();
@@ -319,47 +343,53 @@ function checkAnswersStage4() {
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswer) {
             correctCountStage4++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage4 += 50;
         }
     });
 
     // Calculate points and max for Stage 4
-    stage4pts = correctCountStage4 * 100; // Assuming each correct answer gives 100 points
-    stage4max = decimalNumbersStage4.length * 100; // Assuming each question is worth 100 points
+    stage4Pts = correctCountStage4 * 100; // Assuming each correct answer gives 100 points
+    stage4Max = decimalNumbersStage4.length * 100; // Assuming each question is worth 100 points
 
     // Update Firebase database
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage4pts": stage4pts,
-        "stage4max": stage4max,
+        "stage4pts": stage4Pts,
+        "stage4max": stage4Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage4;
+    });
 
-
-    displayResultStage4(correctCountStage4);
+    displayResultStage4(correctCountStage4, brilliancePtsStage4);
 }
 
 // Function to display result in modal for Stage 4
-function displayResultStage4(correctCountStage4) {
+function displayResultStage4(correctCountStage4, brilliancePtsStage4) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage4 === decimalNumbersStage4.length) {
-                // Add 500 coins to the existing amount
+        modalContent.textContent = `You got a perfect score! 1000 coins added to your account. Brilliance Points: ${brilliancePtsStage4}`;
+        // Add 1000 coins to the existing amount
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + 1000;
         });
-        modalContent.textContent = `You got a perfect score! 1000 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-      
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage4} out of ${decimalNumbersStage4.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage4} out of ${decimalNumbersStage4.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage4}`;
     }
 
     modal.classList.remove('hidden');
@@ -478,12 +508,12 @@ function generateQuizStage5() {
         quizContainerStage5.appendChild(question);
     });
 }
-
 // Function to check answers for Stage 5
 function checkAnswersStage5() {
     let correctCountStage5 = 0;
-    let stage5pts = 0;
-    let stage5max = 0;
+    let brilliancePtsStage5 = 0;
+    let stage5Pts = 0;
+    let stage5Max = 0;
 
     decimalQuestionsStage5.forEach((questionData, index) => {
         const userAnswer = document.getElementById(`answerStage5${index}`).value.trim();
@@ -492,46 +522,53 @@ function checkAnswersStage5() {
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswer) {
             correctCountStage5++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage5 += 50;
         }
     });
 
     // Calculate points and max for Stage 5
-    stage5pts = correctCountStage5 * 100; // Assuming each correct answer gives 100 points
-    stage5max = decimalQuestionsStage5.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    stage5Pts = correctCountStage5 * 100; // Assuming each correct answer gives 100 points
+    stage5Max = decimalQuestionsStage5.length * 100; // Assuming each question is worth 100 points
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage5pts": stage5pts,
-        "stage5max": stage5max,
+        "stage5pts": stage5Pts,
+        "stage5max": stage5Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage5;
+    });
 
-
-    displayResultStage5(correctCountStage5);
+    displayResultStage5(correctCountStage5, brilliancePtsStage5);
 }
 
 // Function to display result in modal for Stage 5
-function displayResultStage5(correctCountStage5) {
+function displayResultStage5(correctCountStage5, brilliancePtsStage5) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage5 === decimalQuestionsStage5.length) {
-            // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1200;
-    });
-        modalContent.textContent = `You got a perfect score! 1200 coins added to your account.`;
+        modalContent.textContent = `You got a perfect score! 1200 coins added to your account. Brilliance Points: ${brilliancePtsStage5}`;
+        // Add 1200 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1200;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage5} out of ${decimalQuestionsStage5.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage5} out of ${decimalQuestionsStage5.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage5}`;
     }
 
     modal.classList.remove('hidden');
@@ -561,63 +598,71 @@ function displayResultStage5(correctCountStage5) {
          quizContainerStage6.appendChild(question);
      });
  }
-
 // Function to check answers for Stage 6
 function checkAnswersStage6() {
     let correctCountStage6 = 0;
-    let stage6pts = 0;
-    let stage6max = 0;
+    let brilliancePtsStage6 = 0;
+    let stage6Pts = 0;
+    let stage6Max = 0;
 
     decimalNumbersStage6.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage6${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswersStage6[index]) {
             correctCountStage6++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage6 += 50;
         }
     });
 
     // Calculate points and max for Stage 6
-    stage6pts = correctCountStage6 * 100; // Assuming each correct answer gives 100 points
-    stage6max = decimalNumbersStage6.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    stage6Pts = correctCountStage6 * 100; // Assuming each correct answer gives 100 points
+    stage6Max = decimalNumbersStage6.length * 100; // Assuming each question is worth 100 points
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage6pts": stage6pts,
-        "stage6max": stage6max,
+        "stage6pts": stage6Pts,
+        "stage6max": stage6Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage6;
+    });
 
-
-    displayResultStage6(correctCountStage6);
+    displayResultStage6(correctCountStage6, brilliancePtsStage6);
 }
 
 // Function to display result in modal for Stage 6
-function displayResultStage6(correctCountStage6) {
+function displayResultStage6(correctCountStage6, brilliancePtsStage6) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage6 === decimalNumbersStage6.length) {
-            // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1500;
-    });
-        modalContent.textContent = `You got a perfect score! 1500 coins added to your account.`;
+        modalContent.textContent = `You got a perfect score! 1500 coins added to your account. Brilliance Points: ${brilliancePtsStage6}`;
+        // Add 1500 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1500;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-     
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage6} out of ${decimalNumbersStage6.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage6} out of ${decimalNumbersStage6.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage6}`;
     }
 
     modal.classList.remove('hidden');
 }
+
 
  //=================================================================================================
 //     STAGE 7
@@ -643,64 +688,71 @@ function displayResultStage6(correctCountStage6) {
             quizContainerStage7.appendChild(question);
         });
     }
-
- // Function to check answers for Stage 7
+// Function to check answers for Stage 7
 function checkAnswersStage7() {
     let correctCountStage7 = 0;
-    let stage7pts = 0;
-    let stage7max = 0;
+    let brilliancePtsStage7 = 0;
+    let stage7Pts = 0;
+    let stage7Max = 0;
 
     decimalNumbersStage7.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage7${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswersStage7[index]) {
             correctCountStage7++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage7 += 50;
         }
     });
 
     // Calculate points and max for Stage 7
-    stage7pts = correctCountStage7 * 100; // Assuming each correct answer gives 100 points
-    stage7max = decimalNumbersStage7.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    stage7Pts = correctCountStage7 * 100; // Assuming each correct answer gives 100 points
+    stage7Max = decimalNumbersStage7.length * 100; // Assuming each question is worth 100 points
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage7pts": stage7pts,
-        "stage7max": stage7max,
+        "stage7pts": stage7Pts,
+        "stage7max": stage7Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage7;
+    });
 
-
-    displayResultStage7(correctCountStage7);
+    displayResultStage7(correctCountStage7, brilliancePtsStage7);
 }
 
 // Function to display result in modal for Stage 7
-function displayResultStage7(correctCountStage7) {
+function displayResultStage7(correctCountStage7, brilliancePtsStage7) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
 
     // Check if the user got a perfect score
     if (correctCountStage7 === decimalNumbersStage7.length) {
-            // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1600;
-    });
-        modalContent.textContent = `You got a perfect score! 1600 coins added to your account.`;
+        modalContent.textContent = `You got a perfect score! 1600 coins added to your account. Brilliance Points: ${brilliancePtsStage7}`;
+        // Add 1600 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1600;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
- 
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage7} out of ${decimalNumbersStage7.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage7} out of ${decimalNumbersStage7.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage7}`;
     }
 
     modal.classList.remove('hidden');
 }
+
 
 //=================================================================================================
 //     STAGE 8
@@ -762,60 +814,68 @@ function generateQuizStage8() {
 // Function to check answers for Stage 8
 function checkAnswersStage8() {
     let correctCountStage8 = 0;
-    let stage8pts = 0;
-    let stage8max = 0;
+    let brilliancePtsStage8 = 0;
+    let stage8Pts = 0;
+    let stage8Max = 0;
 
     decimalNumbersStage8.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage8${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswersStage8[index]) {
             correctCountStage8++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage8 += 50;
         }
     });
 
     // Calculate points and max for Stage 8
-    stage8pts = correctCountStage8 * 100; // Assuming each correct answer gives 100 points
-    stage8max = decimalNumbersStage8.length * 100; // Assuming each question is worth 100 points
+    stage8Pts = correctCountStage8 * 100; // Assuming each correct answer gives 100 points
+    stage8Max = decimalNumbersStage8.length * 100; // Assuming each question is worth 100 points
 
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage8pts": stage8pts,
-        "stage8max": stage8max,
+        "stage8pts": stage8Pts,
+        "stage8max": stage8Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage8;
+    });
 
-    displayResultStage8(correctCountStage8);
+    displayResultStage8(correctCountStage8, brilliancePtsStage8);
 }
 
 // Function to display result in modal for Stage 8
-function displayResultStage8(correctCountStage8) {
+function displayResultStage8(correctCountStage8, brilliancePtsStage8) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage8 === decimalNumbersStage8.length) {
-        
-    // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 1800;
-    });
-        modalContent.textContent = `You got a perfect score! 1800 coins added to your account.`;
+        modalContent.textContent = `You got a perfect score! 1800 coins added to your account. Brilliance Points: ${brilliancePtsStage8}`;
+        // Add 1800 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 1800;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
- 
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage8} out of ${decimalNumbersStage8.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage8} out of ${decimalNumbersStage8.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage8}`;
     }
 
     modal.classList.remove('hidden');
 }
+
 
 
 //=================================================================================================
@@ -892,59 +952,69 @@ function generateQuizStage9() {
 // Function to check answers for Stage 9
 function checkAnswersStage9() {
     let correctCountStage9 = 0;
-    let stage9pts = 0;
-    let stage9max = 0;
+    let brilliancePtsStage9 = 0;
+    let stage9Pts = 0;
+    let stage9Max = 0;
 
     decimalNumbersStage9.forEach((decimal, index) => {
         const userAnswer = document.getElementById(`answerStage9${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === correctAnswersStage9[index]) {
             correctCountStage9++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage9 += 50;
         }
     });
 
     // Calculate points and max for Stage 9
-    stage9pts = correctCountStage9 * 100; // Assuming each correct answer gives 100 points
-    stage9max = decimalNumbersStage9.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    stage9Pts = correctCountStage9 * 100; // Assuming each correct answer gives 100 points
+    stage9Max = decimalNumbersStage9.length * 100; // Assuming each question is worth 100 points
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage9pts": stage9pts,
-        "stage9max": stage9max,
+        "stage9pts": stage9Pts,
+        "stage9max": stage9Max,
     });
 
-    // Add 500 coins to the existing amount
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage9;
+    });
 
-
-    displayResultStage9(correctCountStage9);
+    displayResultStage9(correctCountStage9, brilliancePtsStage9);
 }
 
 // Function to display result in modal for Stage 9
-function displayResultStage9(correctCountStage9) {
+function displayResultStage9(correctCountStage9, brilliancePtsStage9) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage9 === decimalNumbersStage9.length) {
+        modalContent.textContent = `You got a perfect score! 1900 coins added to your account. Brilliance Points: ${brilliancePtsStage9}`;
+        // Add 1900 coins to the existing amount
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + 1900;
         });
-        modalContent.textContent = `You got a perfect score! 1900 coins added to your account.`;
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage9} out of ${decimalNumbersStage9.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage9} out of ${decimalNumbersStage9.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage9}`;
     }
 
     modal.classList.remove('hidden');
 }
+
+
 
 //=================================================================================================
 //     STAGE 10
@@ -1058,59 +1128,66 @@ function generateQuizStage10() {
         quizContainerStage10.appendChild(question);
     });
 }
-
 // Function to check answers for Stage 10
 function checkAnswersStage10() {
     let correctCountStage10 = 0;
-    let stage10pts = 0;
-    let stage10max = 0;
+    let brilliancePtsStage10 = 0;
+    let stage10Pts = 0;
+    let stage10Max = 0;
 
     decimalQuestionsStage10.forEach((questionData, index) => {
         const userAnswer = document.getElementById(`answerStage10${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === questionData.correctAnswer) {
             correctCountStage10++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsStage10 += 50;
         }
     });
 
     // Calculate points and max for Stage 10
-    stage10pts = correctCountStage10 * 100; // Assuming each correct answer gives 100 points
-    stage10max = decimalQuestionsStage10.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    stage10Pts = correctCountStage10 * 100; // Assuming each correct answer gives 100 points
+    stage10Max = decimalQuestionsStage10.length * 100; // Assuming each question is worth 100 points
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
-        "stage10pts": stage10pts,
-        "stage10max": stage10max,
+        "stage10pts": stage10Pts,
+        "stage10max": stage10Max,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsStage10;
+    });
 
-
-    displayResultStage10(correctCountStage10);
+    displayResultStage10(correctCountStage10, brilliancePtsStage10);
 }
 
 // Function to display result in modal for Stage 10
-function displayResultStage10(correctCountStage10) {
+function displayResultStage10(correctCountStage10, brilliancePtsStage10) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountStage10 === decimalQuestionsStage10.length) {
-            // Add 500 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 2000;
-    });
-        modalContent.textContent = `You got a perfect score! 2000 coins added to your account.`;
+        modalContent.textContent = `You got a perfect score! 2000 coins added to your account. Brilliance Points: ${brilliancePtsStage10}`;
+        // Add 2000 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 2000;
+        });
     } else {
         // Generate a random reward between 100 and 200 coins
         const randomReward = Math.floor(Math.random() * (200 - 100 + 1) + 100);
         // Add the random reward to the existing amount
-
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountStage10} out of ${decimalQuestionsStage10.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountStage10} out of ${decimalQuestionsStage10.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsStage10}`;
     }
 
     modal.classList.remove('hidden');
@@ -1254,59 +1331,66 @@ function generateQuizFinalStage() {
         quizContainerFinalStage.appendChild(question);
     });
 }
-
 // Function to check answers for the final stage
 function checkAnswersFinalStage() {
     let correctCountFinalStage = 0;
+    let brilliancePtsFinalStage = 0;
     let finalStagePts = 0;
     let finalStageMax = 0;
 
     decimalQuestionsFinalStage.forEach((questionData, index) => {
         const userAnswer = document.getElementById(`answerFinalStage${index}`).value.trim();
-        
+
         // Compare user's answer with correct answer
         if (userAnswer === questionData.correctAnswer) {
             correctCountFinalStage++;
+
+            // Assuming each correct answer gives 50 brilliance points
+            brilliancePtsFinalStage += 50;
         }
     });
 
     // Calculate points and max for the final stage
     finalStagePts = correctCountFinalStage * 100; // Assuming each correct answer gives 100 points
     finalStageMax = decimalQuestionsFinalStage.length * 100; // Assuming each question is worth 100 points
-    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
     playerInfoRef.update({
         "stagefinalpts": finalStagePts,
         "stagefinalmax": finalStageMax,
     });
 
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsFinalStage;
+    });
 
-
-    displayResultFinalStage(correctCountFinalStage);
+    displayResultFinalStage(correctCountFinalStage, brilliancePtsFinalStage);
 }
 
 // Function to display result in modal for the final stage
-function displayResultFinalStage(correctCountFinalStage) {
+function displayResultFinalStage(correctCountFinalStage, brilliancePtsFinalStage) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
     const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
     // Check if the user got a perfect score
     if (correctCountFinalStage === decimalQuestionsFinalStage.length) {
-            // Add 1000 coins to the existing amount
-    playerInfoRef.child("coin").transaction(function(currentCoin) {
-        return (+currentCoin || 0) + 5000;
-    });
-        modalContent.textContent = `Congratulations! You got a perfect score in final stage! 5000 coins added to your account.`;
+        modalContent.textContent = `Congratulations! You got a perfect score in the final stage! 5000 coins added to your account. Brilliance Points: ${brilliancePtsFinalStage}`;
+        // Add 5000 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 5000;
+        });
     } else {
         // Generate a random reward between 200 and 300 coins
         const randomReward = Math.floor(Math.random() * (300 - 200 + 1) + 200);
         // Add the random reward to the existing amount
-
         playerInfoRef.child("coin").transaction(function(currentCoin) {
             return (+currentCoin || 0) + randomReward;
         });
 
-        modalContent.textContent = `You got ${correctCountFinalStage} out of ${decimalQuestionsFinalStage.length} correct. You received a reward of ${randomReward} coins!`;
+        modalContent.textContent = `You got ${correctCountFinalStage} out of ${decimalQuestionsFinalStage.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsFinalStage}`;
     }
 
     modal.classList.remove('hidden');

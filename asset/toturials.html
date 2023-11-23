@@ -22,15 +22,14 @@
 </style>
 <body class="bg-gray-800 overflow-auto w-screen">
 
-    <!-- Header -->
-    <header class="bg-gray-900 text-white py-4 px-2 md:px-16">
+    <header class="bg-gray-900 text-white py-4 px-2 md:px-16 flex justify-between items-center">
         <div>
             <img src="/asset/src/icon/LOGO.png" class="h-16">
         </div>
         <div>
-            
+            <!-- Back button -->
+            <button onclick="goBack()" class="text-white">Back</button>
         </div>
-       
     </header>
 
 
@@ -190,6 +189,25 @@
                 });
             });
         });
+    </script>
+    <script>
+        // JavaScript function to go back
+        function goBack() {
+            // Get the current URL
+            const currentURL = window.location.href;
+    
+            // Extract the username from the URL
+            const usernameMatch = currentURL.match(/username=([^&]*)/);
+            const username = usernameMatch && usernameMatch[1];
+    
+            // Send the username to another page (replace 'target_page.html' with the actual target page)
+            if (username) {
+                window.location.href = `dashboard.html?username=${username}`;
+            } else {
+                // If username is not found, simply go back
+                window.history.back();
+            }
+        }
     </script>
 </body>
 </html>

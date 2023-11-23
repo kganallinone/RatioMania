@@ -58,9 +58,17 @@
                     <i class="material-icons text-white mr-2">monetization_on</i>
                     <span id="coin" class="text-white"></span>
                 </div>
-                <div class="flex items-center bg-gray-800 border-2 border-white p-1 rounded rounded-md w-1/2 md:w-1/2 lg:w-1/2">
+                <div id="rankButton" class="flex items-center bg-gray-800 border-2 border-white p-1 rounded rounded-md w-1/2 md:w-1/2 lg:w-1/2">
                     <i class="material-icons text-white mr-2">star</i>
-                    <span id="rank" class="text-white"></span>
+                    <span id="rank" class="text-white text-xs md:text-sm lg:text-lg"></span>
+                </div>
+                <div class="flex items-center bg-gray-800 border-2 border-white p-1 rounded rounded-md w-1/2 md:w-1/2 lg:w-1/2">
+                    <i class="material-icons text-white mr-2">lightbulb</i>
+                    <div>
+                        <span class="text-xs text-white">BRILLIANCE</span><br>
+                        <span id="brilliance" class="text-white"> 0</span>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -127,6 +135,18 @@
         window.close();
     });
     </script>
+    <!-- Add this script in the head section of your existing HTML page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rankButton = document.getElementById('rankButton');
+
+        rankButton.addEventListener('click', function() {
+            // Redirect to the brilliance ranking page
+            window.location.href = 'ranking.html';
+        });
+    });
+</script>
+
 
 
 </body>

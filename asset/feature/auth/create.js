@@ -23,6 +23,7 @@ function CreateAccount() {
                 return database.ref('player_info/' + username).set({
                     username: username,
                     age: age,
+                    brilliance_pts: "0",
                     stage1: "OPEN",
                     stage2: "OFF",
                     stage3: "OFF",

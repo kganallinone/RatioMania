@@ -147,13 +147,16 @@
         
    
         <!-- Modal HTML -->
-        <div id="buyModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-            <div class="bg-white p-8 rounded-lg w-96 m-5">
-                <span class="material-icons cursor-pointer absolute top-4 right-4 text-gray-700" onclick="closeModal()">close</span>
-                <p id="priceMessage" class="text-lg font-semibold mb-4 text-blue-800">Your price message goes here.</p>
-                <button id="buyBttn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">Buy Stage</button>
-            </div>
-        </div>
+ <!-- Modal HTML -->
+<div id="buyModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-8 rounded-lg w-96 m-5">
+        <span class="material-icons cursor-pointer absolute top-4 right-4 text-gray-200 font-bold p-1" onclick="closeModal()">close</span>
+        <p id="priceMessage" class="text-lg font-semibold mb-4 text-blue-800">Your price message goes here.</p>
+        <!-- Updated button with an id and onclick attribute -->
+        <button id="buyBttn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue" onclick="buyStage()">Buy Stage</button>
+    </div>
+</div>
+
         
         
         

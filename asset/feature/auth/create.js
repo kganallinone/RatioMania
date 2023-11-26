@@ -24,6 +24,7 @@ function CreateAccount() {
                     username: username,
                     age: age,
                     brilliance_pts: "0",
+                    setting_sound: "OFF",
                     stage1: "OPEN",
                     stage2: "OFF",
                     stage3: "OFF",

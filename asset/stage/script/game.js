@@ -1,4 +1,7 @@
-
+function playClickSound() {
+    var audio = document.getElementById("clickSound");
+    audio.play();
+}
 //=================================================================================================
 //     STAGE 1
 //=================================================================================================
@@ -24,6 +27,7 @@ function generateQuiz() {
 }
 // Function to check answers and update database
 function checkAnswers() {
+    playClickSound();
     let correctCount = 0;
     let brilliancePts = 0;
     let stage1Pts = 0;
@@ -113,6 +117,7 @@ function displayResult(message) {
 
   // Function to check answers for Stage 2
 function checkAnswersStage2() {
+    playClickSound();
     let correctCountStage2 = 0;
     let brilliancePtsStage2 = 0;
     let stage2Pts = 0;
@@ -220,6 +225,7 @@ function displayResultStage2(correctCountStage2, brilliancePtsStage2) {
  }
 // Function to check answers for Stage 3
 function checkAnswersStage3() {
+    playClickSound();
     let correctCountStage3 = 0;
     let brilliancePtsStage3 = 0;
     let stage3Pts = 0;
@@ -331,6 +337,7 @@ function displayResultStage3(correctCountStage3, brilliancePtsStage3) {
 
 // Function to check answers for Stage 4
 function checkAnswersStage4() {
+    playClickSound();
     let correctCountStage4 = 0;
     let brilliancePtsStage4 = 0;
     let stage4Pts = 0;
@@ -510,6 +517,7 @@ function generateQuizStage5() {
 }
 // Function to check answers for Stage 5
 function checkAnswersStage5() {
+    playClickSound();
     let correctCountStage5 = 0;
     let brilliancePtsStage5 = 0;
     let stage5Pts = 0;
@@ -600,6 +608,7 @@ function displayResultStage5(correctCountStage5, brilliancePtsStage5) {
  }
 // Function to check answers for Stage 6
 function checkAnswersStage6() {
+    playClickSound();
     let correctCountStage6 = 0;
     let brilliancePtsStage6 = 0;
     let stage6Pts = 0;
@@ -690,6 +699,7 @@ function displayResultStage6(correctCountStage6, brilliancePtsStage6) {
     }
 // Function to check answers for Stage 7
 function checkAnswersStage7() {
+    playClickSound();
     let correctCountStage7 = 0;
     let brilliancePtsStage7 = 0;
     let stage7Pts = 0;
@@ -813,6 +823,7 @@ function generateQuizStage8() {
 }
 // Function to check answers for Stage 8
 function checkAnswersStage8() {
+    playClickSound();
     let correctCountStage8 = 0;
     let brilliancePtsStage8 = 0;
     let stage8Pts = 0;
@@ -951,6 +962,7 @@ function generateQuizStage9() {
 }
 // Function to check answers for Stage 9
 function checkAnswersStage9() {
+    playClickSound();
     let correctCountStage9 = 0;
     let brilliancePtsStage9 = 0;
     let stage9Pts = 0;
@@ -1130,6 +1142,7 @@ function generateQuizStage10() {
 }
 // Function to check answers for Stage 10
 function checkAnswersStage10() {
+    playClickSound();
     let correctCountStage10 = 0;
     let brilliancePtsStage10 = 0;
     let stage10Pts = 0;
@@ -1333,6 +1346,7 @@ function generateQuizFinalStage() {
 }
 // Function to check answers for the final stage
 function checkAnswersFinalStage() {
+    playClickSound();
     let correctCountFinalStage = 0;
     let brilliancePtsFinalStage = 0;
     let finalStagePts = 0;

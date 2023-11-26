@@ -1,3 +1,5 @@
+
+
 // Function to extract the username from the URL
 function getUsernameFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -6,6 +8,9 @@ function getUsernameFromURL() {
 
 // Get the username and display it on the page
 const username = getUsernameFromURL();
+
+
+
 if (username) {
   document.getElementById('username').textContent = `Hello, ${username}!`;
 

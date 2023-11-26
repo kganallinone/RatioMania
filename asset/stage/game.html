@@ -21,11 +21,12 @@
 
 </style>
 <body class="bg-gray-800 overflow-auto w-screen">
-
+    <audio autoplay="" loop src="../src/sound/bg.wav"></audio>
+    <audio id="clickSound" src="../src/sound/click.mp3"></audio>
     <!-- Header -->
     <header class="bg-gray-900 text-white py-4 px-2 md:px-16">
         <div>
-            <img src="/asset/src/icon/LOGO.png" class="h-16">
+            <img src="../src/icon/LOGO.png" class="h-16">
         </div>
         <div>
             
@@ -213,6 +214,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./auth//config.js"></script>
     <script>
+
+
         // Function to extract parameters from the URL
         function getParametersFromURL() {
             const urlParams = new URLSearchParams(window.location.search);

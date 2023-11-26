@@ -20,14 +20,15 @@
     }
 
 </style>
-<body class="bg-gray-800 overflow-auto w-screen">
+<body class="bg-gray-800 overflow-auto w-screen h-screen">
+    <audio autoplay="" loop src="./src/sound/bg.wav"></audio>
 <!-- Header -->
 <!-- Header -->
-<header class="bg-gray-900 text-white py-4 px-4 md:px-16 flex items-center justify-between">
+<header class="bg-gray-900 text-white py-4 px-4 md:px-16 flex items-center justify-between h-1/8">
 
     <!-- Left side with logo -->
     <div>
-        <img src="/asset/src/icon/LOGO.png" class="h-12 md:h-16" alt="Logo">
+        <img src="./src/icon/LOGO.png" class="h-12 md:h-16" alt="Logo">
     </div>
 
     <!-- Right side with Google Home Icon and link -->
@@ -41,72 +42,121 @@
 
 
 
-    <section class="py-4 px-5 md:px-16">
+    <section class="py-4 px-5 md:px-16 overflow-x-auto whitespace-no-wrap flex gap-28 h-7/8 mt-20">
     
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 1</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Terminating by Tenths </span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="goTo('stage1')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 ml-10 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage1_img" alt="Stage Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 1</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Terminating by Tenths</span>
+                <a href="#" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="goTo('stage1')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 2</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Terminating by Hundredths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage2')">GO</a>
+        
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage2_img" alt="Stage 2 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 2</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Terminating by Hundredths</span>
+                <a href="#" id="stage2Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage2')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 3</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Terminating by Thousandths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage3')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage3_img" alt="Stage 3 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 3</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Terminating by Thousandths</span>
+                <a href="#" id="stage3Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage3')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 4</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Terminating by Ten Thousandths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage4')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage4_img" alt="Stage 4 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 4</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Terminating by Ten Thousandths</span>
+                <a href="#" id="stage4Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage4')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 5</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Mixed Terminating</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage5')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage5_img" alt="Stage 5 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 5</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Mixed Terminating</span>
+                <a href="#" id="stage5Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage5')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 6</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Non-Terminating by tenths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage6')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage6_img" alt="Stage 6 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 6</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Non-Terminating by Tenths</span>
+                <a href="#" id="stage6Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage6')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 7</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center"> Non-Terminating by Hundredths </span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage7')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage7_img" alt="Stage 7 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 7</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Non-Terminating by Hundredths</span>
+                <a href="#" id="stage7Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage7')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 8</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Non-Terminating by Thousandths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage8')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage8_img" alt="Stage 8 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 8</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Non-Terminating by Thousandths</span>
+                <a href="#" id="stage8Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage8')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 9</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Non-Terminating by Ten Thousandths</span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage9')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage9_img" alt="Stage 9 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 9</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Non-Terminating by Ten Thousandths</span>
+                <a href="#" id="stage9Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage9')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Stage 10</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">Mixed Non-Terminating </span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage10')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3">
+            <img src="./src/bg/STAGEBG.png" id="stage10_img" alt="Stage 10 Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Stage 10</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Mixed Non-Terminating</span>
+                <a href="#" id="stage10Button" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage10')">GO</a>
+            </div>
         </div>
-        <div class="grid grid-cols-10 bg-gray-700 p-2 rounded-md shadow-lg mb-4 ">
-            <span class="col-span-2 text-white text-center">Final Stage</span>
-            <span class="col-span-6 text-yellow-500 font-bold text-center">QUIZ </span>
-            <a href="#" class="col-span-2 bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage_final')">GO</a>
+        
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3 mr-10">
+            <img src="./src/bg/STAGEBG.png" id="stage_final_img" alt="Final Stage Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Final Stage</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">QUIZ</span>
+                <a href="#" id="stage_finalButton" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage_final')">GO</a>
+            </div>
         </div>
+        
    
         <!-- Modal HTML -->
         <div id="buyModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-            <div class="bg-white p-8 rounded-lg">
+            <div class="bg-white p-8 rounded-lg w-96 m-5">
                 <span class="material-icons cursor-pointer absolute top-4 right-4 text-gray-700" onclick="closeModal()">close</span>
-                <p id="priceMessage" class="text-lg font-semibold mb-4"></p>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick="buyStage()">Buy Stage</button>
+                <p id="priceMessage" class="text-lg font-semibold mb-4 text-blue-800">Your price message goes here.</p>
+                <button id="buyBttn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">Buy Stage</button>
             </div>
         </div>
+        
+        
+        
 
         
     </section>
@@ -155,59 +205,141 @@
         }
 
         function displayModal(username, stage) {
+    const buyBttn = document.getElementById('buyBttn');
+    const modal = document.getElementById('buyModal');
+    const priceMessage = document.getElementById('priceMessage');
 
-            const modal = document.getElementById('buyModal');
-            const priceMessage = document.getElementById('priceMessage');
+    if (username && stage) {
+        const userRef = firebase.database().ref(`/player_info/${username}`);
 
-            if (username && stage) {
-                const userRef = firebase.database().ref(`/player_info/${username}/${stage}`);
-                
-                // Retrieve the current value before updating
-                userRef.once('value')
-                    .then(snapshot => {
-                        const currentValue = snapshot.val();
-                        
-                        // Check if the current value is 'OFF' before updating
-                        if (currentValue === 'OFF') {
+        // Retrieve the brilliance_pts value before updating the stage status
+        userRef.once('value')
+            .then(snapshot => {
+                const brilliancePts = snapshot.child('brilliance_pts').val();
+
+                let stageRequirement;
+
+                // Set brilliance point requirement based on the stage
+                switch (stage) {
+                    case 'stage1':
+                        name = "Stage 1";
+                        stageRequirement = 0; // Set your requirement for Stage 1
+                        break;
+                    case 'stage2':
+                    name = "Stage 2";
+                        stageRequirement = 250;
+                        break;
+                    case 'stage3':
+                    name = "Stage 3";
+                        stageRequirement = 750;
+                        break;
+                    case 'stage4':
+                    name = "Stage 4";
+                        stageRequirement = 1500;
+                        break;
+                    case 'stage5':
+                    name = "Stage 5";
+                        stageRequirement = 2500;
+                        break;
+                    case 'stage6':
+                    name = "Stage 6";
+                        stageRequirement = 3500;
+                        break;
+                    case 'stage7':
+                    name = "Stage 7";
+                        stageRequirement = 5000;
+                        break;
+                    case 'stage8':
+                    name = "Stage 8";
+                        stageRequirement = 7500;
+                        break;
+                    case 'stage9':
+                    name = "Stage 9";
+                        stageRequirement = 11000;
+                        break;
+                    case 'stage10':
+                    name = "Stage 10";
+                        stageRequirement = 15000;
+                        break;
+                    case 'stage_final':
+                    name = "Final Stage";
+                        stageRequirement = 20000;
+                        break;
+
+                    default:
+                        stageRequirement = 0; // Set a default value or handle the default case
+                        break;
+                }
+
+                if (brilliancePts < stageRequirement) {
+                    // If brilliance_pts is less than the stage requirement, set button text to "LOCKED"
+                    priceMessage.textContent = `Brilliance Points: ${brilliancePts}. ${name} is LOCKED. Required: ${stageRequirement}`;
+                    modal.classList.remove('hidden');
+                    buyBttn.classList.add('hidden');
+
+                } else {
+                    const stageRef = userRef.child(stage);
+
+                    // Retrieve the current value before updating
+                    stageRef.once('value')
+                        .then(snapshot => {
+                            const currentValue = snapshot.val();
+
+                            // Check if the current value is 'OFF' before updating
+                            if (currentValue === 'OFF') {
                                 let price;
-                                if (stage === 'stage2') {
-                                    name = "Stage 2"
-                                    price = 500;
-                                } else if (stage === 'stage3') {
-                                    name = "Stage 3"
-                                    price = 1000;
-                                }
-                                else if (stage === 'stage4') {
-                                    name = "Stage 4"
-                                    price = 2500;
-                                }
-                                else if (stage === 'stage5') {
-                                    name = "Stage 5"
-                                    price = 4000;
-                                }
-                                else if (stage === 'stage6') {
-                                    name = "Stage 6"
-                                    price = 5500;
-                                }
-                                else if (stage === 'stage7') {
-                                    name = "Stage 7"
-                                    price = 8000;
-                                }
-                                else if (stage === 'stage8') {
-                                    name = "Stage 8"
-                                    price = 10000;
-                                }
-                                else if (stage === 'stage9') {
-                                    name = "Stage 9"
-                                    price = 15500;
-                                }
-                                else if (stage === 'stage10') {
-                                    name = "Stage 10"
-                                    price = 20000;
-                                }
-                                else if (stage === 'stage_final') {
-                                    name = "Final Stage"
-                                    price = 30000;
+                                let name;
+
+                                // Assign the price based on the stage
+                                switch (stage) {
+                                    case 'stage1':
+                                        name = 'Stage 1';
+                                        price = 0; // Set your price for Stage 1
+                                        break;
+                                    case 'stage2':
+                                        name = 'Stage 2';
+                                        price = 500;
+                                        break;
+                                    case 'stage3':
+                                        name = 'Stage 3';
+                                        price = 1000;
+                                        break;
+                                    case 'stage4':
+                                        name = 'Stage 4';
+                                        price = 2500;
+                                        break;
+                                    case 'stage5':
+                                        name = 'Stage 5';
+                                        price = 4000;
+                                        break;
+                                    case 'stage6':
+                                        name = 'Stage 6';
+                                        price = 5500;
+                                        break;
+                                    case 'stage7':
+                                        name = 'Stage 7';
+                                        price = 8000;
+                                        break;
+                                    case 'stage8':
+                                        name = 'Stage 8';
+                                        price = 10000;
+                                        break;
+                                    case 'stage9':
+                                        name = 'Stage 9';
+                                        price = 15500;
+                                        break;
+                                    case 'stage10':
+                                        name = 'Stage 10';
+                                        price = 20000;
+                                        break;
+                                    case 'stage_final':
+                                        name = 'Final Stage';
+                                        price = 30000;
+                                        break;
+
+                                    default:
+                                        // Handle the default case if stage is not recognized
+                                        break;
                                 }
 
                                 priceMessage.textContent = `Price for ${name}: $${price}`;
@@ -216,19 +348,24 @@
                                 // Store username and stage in the modal for use in the buyStage function
                                 modal.setAttribute('data-username', username);
                                 modal.setAttribute('data-stage', stage);
-                     
-                        } else {
-                            // Stage is already open, proceed to the selected stage
-                            closeModal();
-                            goTo(stage);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error retrieving current stage status:", error);
-                    });
-            }
-         
-        }
+
+                            } else {
+                                // Stage is already open, proceed to the selected stage
+                                closeModal();
+                                goTo(stage);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error retrieving current stage status:", error);
+                        });
+                }
+            })
+            .catch(error => {
+                console.error("Error retrieving brilliance_pts:", error);
+            });
+    }
+}
+
 
         function buyStage() {
             // Get the stored username and stage from the modal
@@ -275,6 +412,87 @@
                 }
             }
 
+    </script>
+
+    <script>
+    function updateGoButton(username, stage) {
+    const userRef = firebase.database().ref(`/player_info/${username}`);
+
+    userRef.once('value')
+        .then(snapshot => {
+            const brilliancePts = snapshot.child('brilliance_pts').val();
+            let stageRequirement;
+
+            // Set brilliance point requirement based on the stage
+            switch (stage) {
+                case 'stage1':
+                    stageRequirement = 0; // Set your requirement for Stage 1
+                    break;
+                case 'stage2':
+                    stageRequirement = 250;
+                    break;
+                case 'stage3':
+                    stageRequirement = 750;
+                    break;
+                case 'stage4':
+                    stageRequirement = 1500;
+                    break;
+                case 'stage5':
+                    stageRequirement = 2500;
+                    break;
+                case 'stage6':
+                    stageRequirement = 3500;
+                    break;
+                case 'stage7':
+                    stageRequirement = 5000;
+                    break;
+                case 'stage8':
+                    stageRequirement = 7500;
+                    break;
+                case 'stage9':
+                    stageRequirement = 11000;
+                    break;
+                case 'stage10':
+                    stageRequirement = 15000;
+                    break;
+                case 'stage_final':
+                    stageRequirement = 20000;
+                    break;
+                default:
+                    stageRequirement = 0; // Set a default value or handle the default case
+                    break;
+            }
+
+ 
+            const goButton = document.getElementById(`${stage}Button`); 
+            const stageImg = document.getElementById(`${stage}_img`);
+
+            if (brilliancePts < stageRequirement) {
+                // If brilliance_pts is less than the stage requirement, set button text to "LOCKED"
+                goButton.textContent = "LOCKED";
+                stageImg.src = "./src/bg/locked.png";
+            } else {
+                // If brilliance_pts is equal to or greater than the stage requirement, set button text to "GO"
+                goButton.textContent = "GO";
+                stageImg.src = "./src/bg/STAGEBG.png";
+            }
+        })
+        .catch(error => {
+            console.error("Error retrieving brilliance_pts:", error);
+        });
+}
+
+        
+        updateGoButton(getUsernameFromURL(), 'stage2');
+        updateGoButton(getUsernameFromURL(), 'stage3');
+        updateGoButton(getUsernameFromURL(), 'stage4');
+        updateGoButton(getUsernameFromURL(), 'stage5');
+        updateGoButton(getUsernameFromURL(), 'stage6');
+        updateGoButton(getUsernameFromURL(), 'stage7');
+        updateGoButton(getUsernameFromURL(), 'stage8');
+        updateGoButton(getUsernameFromURL(), 'stage9');
+        updateGoButton(getUsernameFromURL(), 'stage10');
+        updateGoButton(getUsernameFromURL(), 'stage_final');
     </script>
 
 

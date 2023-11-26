@@ -6,12 +6,14 @@ function getUsernameFromURL() {
   return urlParams.get('username');
 }
 
+
 // Get the username and display it on the page
 const username = getUsernameFromURL();
 
 
 
 if (username) {
+  
   document.getElementById('username').textContent = `Hello, ${username}!`;
 
   // Reference to the Firebase Realtime Database

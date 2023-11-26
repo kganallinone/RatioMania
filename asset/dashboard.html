@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <!-- Include Animate.css in your HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha384-GLhlTQ8iK9tWQF6Wg/vuo9TErZ9iiPQbPyL/7upzI3qVqDzPnBU5S8F0R+caG5Za" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Your Website</title>
 </head>
@@ -21,7 +23,7 @@
 
 </style>
 <body class="bg-gray-800 overflow-auto w-screen">
-    <audio autoplay="" loop src="./src/sound/bg.wav"></audio>
+  
     <header class="bg-gray-900 text-white py-4 px-4 md:px-16 flex items-center justify-between">
 
         <!-- Left side with logo -->
@@ -37,9 +39,20 @@
             </a>
     
             <!-- Dropdown content -->
-            <div id="dropdown" class="absolute right-0 mt-16 bg-white text-gray-800 rounded-md shadow-md hidden">
-                <a href="#"  id="logout-link" class="block px-4 py-2 text-sm">Logout</a>
+            <div id="dropdown" class="absolute right-0 mt-28 bg-white text-gray-800 rounded-md shadow-md hidden">
+                <a href="#" id="logout-link" class="block px-4 py-2 text-sm">Logout</a>
+                <div class="flex items-center px-4 py-2 text-sm">
+                    <label for="sound-toggle" class="mr-2">Sound</label>
+                    <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" id="sound-toggle" class="hidden">
+                        <label for="sound-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+                            <span class="toggle-button inline-block w-5 h-5 bg-white rounded-full shadow-md transform translate-x-0 transition-transform"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
+            
+            
     
         </div>
     
@@ -147,6 +160,43 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleSwitch = document.getElementById('sound-toggle');
+        var audioElement = new Audio('./src/sound/bg.mp3'); // Replace 'path/to/your/sound.wav' with the actual path to your WAV file
+
+         // Retrieve sound state from localStorage
+         var soundState = localStorage.getItem('soundState');
+        if (soundState === 'on') {
+            toggleSwitch.checked = true;
+            playAudio();
+        }
+
+        toggleSwitch.addEventListener('change', function () {
+            if (toggleSwitch.checked) {
+                playAudio();
+            } else {
+                pauseAudio();
+            }
+
+            // Save sound state to localStorage
+            localStorage.setItem('soundState', toggleSwitch.checked ? 'on' : 'off');
+        });
+
+        function playAudio() {
+            audioElement.play();
+            document.querySelector('.toggle-button').style.transform = 'translateX(100%)';
+        }
+
+        function pauseAudio() {
+            audioElement.pause();
+            document.querySelector('.toggle-button').style.transform = 'translateX(0)';
+        }
+    });
+</script>
+
+
+
 
 
 

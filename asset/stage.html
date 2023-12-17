@@ -144,6 +144,15 @@
                 <a href="#" id="stage_finalButton" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'stage_final')">GO</a>
             </div>
         </div>
+
+        <div class="flex-none w-64 h-full bg-gray-900 rounded-md overflow-hidden shadow-lg p-3 mr-10">
+            <img src="./src/bg/STAGEBG.png" id="problem-solving-stage_img" alt="Final Stage Image" class="w-full h-32 object-cover rounded-md border-2 border-white">
+            <div class="p-4">
+                <span class="block text-gray-200 text-center text-lg font-semibold mb-2">Additional Stage</span>
+                <span class="block text-yellow-500 text-center font-bold mb-4">Problem Solving</span>
+                <a href="#" id="problem-solving-stageButton" class="block bg-gray-500 text-white px-3 py-1 rounded-md text-center" onclick="displayModal(getUsernameFromURL(), 'problem-solving-stage')">GO</a>
+            </div>
+        </div>
         
    
         <!-- Modal HTML -->
@@ -269,6 +278,11 @@
                         stageRequirement = 20000;
                         break;
 
+                    case 'problem-solving-stage':
+                    name = "Problem Solving Stage";
+                        stageRequirement = 30000;
+                        break;
+
                     default:
                         stageRequirement = 0; // Set a default value or handle the default case
                         break;
@@ -340,6 +354,12 @@
                                         price = 30000;
                                         break;
 
+                                    case 'problem-solving-stage':
+                                        name = 'Problem Solving Stage';
+                                        price = 40000;
+                                        break;
+
+
                                     default:
                                         // Handle the default case if stage is not recognized
                                         break;
@@ -388,7 +408,7 @@
                         const userData = snapshot.val();
                         
                         // Check if the user has enough coins
-                        const price = (stage === 'stage2') ? 500 : (stage === 'stage3') ? 1000 : (stage === 'stage4') ? 2500 : (stage === 'stage5') ? 4000 : (stage === 'stage6') ? 5500 : (stage === 'stage7') ? 8000 : (stage === 'stage8') ? 10000 : (stage === 'stage9') ? 15500 : (stage === 'stage10') ? 20000 : (stage === 'final_stage') ? 30000 : 0; // Add more stages as needed
+                        const price = (stage === 'stage2') ? 500 : (stage === 'stage3') ? 1000 : (stage === 'stage4') ? 2500 : (stage === 'stage5') ? 4000 : (stage === 'stage6') ? 5500 : (stage === 'stage7') ? 8000 : (stage === 'stage8') ? 10000 : (stage === 'stage9') ? 15500 : (stage === 'stage10') ? 20000 : (stage === 'stage_final') ? 30000 :  (stage === 'problem-solving-stage') ? 40000 : 0; // Add more stages as needed
                         
                         if (userData.coin >= price) {
                             // Deduct the price from the user's coin
@@ -461,6 +481,9 @@
                 case 'stage_final':
                     stageRequirement = 20000;
                     break;
+                case 'problem-solving-stage':
+                    stageRequirement = 30000;
+                    break;
                 default:
                     stageRequirement = 0; // Set a default value or handle the default case
                     break;
@@ -496,6 +519,7 @@
         updateGoButton(getUsernameFromURL(), 'stage9');
         updateGoButton(getUsernameFromURL(), 'stage10');
         updateGoButton(getUsernameFromURL(), 'stage_final');
+        updateGoButton(getUsernameFromURL(), 'problem-solving-stage');
     </script>
 
 

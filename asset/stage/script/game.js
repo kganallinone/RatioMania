@@ -1409,7 +1409,132 @@ function displayResultFinalStage(correctCountFinalStage, brilliancePtsFinalStage
 
     modal.classList.remove('hidden');
 }
+//=================================================================================================
+//     ADDITIONAL STAGE
+//=================================================================================================
+const problemSolvingQuestions = [
+    {
+        question: 'Kristy buys an assorted box of chocolate that contains 17.63 ounces of dark chocolate and 36.24 ounces of milk chocolate. How much does chocolate weigh in total? Convert your answer to fraction form.',
+        options: ['53 29/33', '53 79/90', '5 387/100', '5387/10000'],
+        correctAnswer: '5387/10000'
+    },
+    {
+        question: 'A water tank has 56.32 liters capacity. If Joan used 23.18 liters, how much water is left in the water tank? Convert your answer into fraction form.',
+        options: ['33 14/99', '33 13/90', '33 2/5', '33 7/50'],
+        correctAnswer: '33 7/50'
+    },
+    {
+        question: 'John bought a chocolate pack for P85.50. He gave P100 to the shopkeeper. How much money did he get back from the shopkeeper? Convert your answer into fraction form.',
+        options: ['14 50/99', '14 1/2', '15 50/99', '15 1/2'],
+        correctAnswer: '15 1/2'
+    },
+    {
+        question: 'Kate had P368.29. Her mother gave her P253.46, and her sister gave her P57.39. How much money does she have now? Convert your answer into fraction form.',
+        options: ['679 7/99', '679 7/50', '678 50/99', '678 7/50'],
+        correctAnswer: '678 7/50'
+    },
+    {
+        question: 'The rainfall in a city during the months of July, August, and September were 9.82 cm, 5.24 cm, and 2.32 cm respectively. Find the total rainfall for three months.',
+        options: ['18 19/33', '18 19/50', '17 19/50', '17 19/33'],
+        correctAnswer: '17 19/33'
+    },
+    // Add more questions as needed
+];
 
+// Function to shuffle an array randomly
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Function to generate quiz questions for the problem-solving stage
+function generateQuizProblemSolving() {
+    const quizContainerProblemSolving = document.getElementById('quiz-container-problem-solving');
+
+    problemSolvingQuestions.forEach((questionData, index) => {
+        const options = questionData.options.slice(); // Copy the options
+        shuffleArray(options); // Shuffle the options
+
+        const question = document.createElement('div');
+        question.className = 'mb-4';
+        question.innerHTML = `
+            <p class="text-lg font-medium text-white">${index + 1}. ${questionData.question}</p>
+            <select id="answerProblemSolving${index}" class="border border-white text-white bg-gray-700 px-2 py-1 rounded-md focus:outline-none focus:border-blue-500">
+                <option value="" disabled selected>Select Fraction</option>
+                ${options.map(option => `<option value="${option}">${option}</option>`).join('')}
+            </select>
+            <span class="hidden" id="correctAnswerProblemSolving${index}">${questionData.correctAnswer}</span>
+        `;
+        quizContainerProblemSolving.appendChild(question);
+    });
+}
+
+// Function to check answers for the problem-solving stage
+function checkAnswersProblemSolving() {
+    playClickSound();
+    let correctCountProblemSolving = 0;
+    let brilliancePtsProblemSolvingStage = 0;
+    let problemSolvingPts = 0;
+    let problemSolvingMax = 0;
+
+    problemSolvingQuestions.forEach((questionData, index) => {
+        const userAnswer = document.getElementById(`answerProblemSolving${index}`).value.trim();
+
+        // Compare user's answer with correct answer
+        if (userAnswer === questionData.correctAnswer) {
+            correctCountProblemSolving++;
+            brilliancePtsProblemSolvingStage += 50;
+        }
+    });
+
+    // Calculate points and max for the problem-solving stage
+    problemSolvingPts = correctCountProblemSolving * 100; // Assuming each correct answer gives 100 points
+    problemSolvingMax = problemSolvingQuestions.length * 100; // Assuming each question is worth 100 points
+
+    // Update Firebase database
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+    playerInfoRef.update({
+        "problem-solving-stage-pts": problemSolvingPts,
+        "problem-solving-stage-max": problemSolvingMax,
+    });
+
+    // Update brilliance points in the database
+    playerInfoRef.child("brilliance_pts").transaction(function (currentBrilliancePts) {
+        return (+currentBrilliancePts || 0) + brilliancePtsProblemSolvingStage;
+    });
+
+    // Display result or perform other actions
+    displayResultProblemSolving(correctCountProblemSolving, problemSolvingPts);
+}
+
+// Function to display result in modal for the problem-solving stage
+function displayResultProblemSolving(correctCountProblemSolving, brilliancePtsProblemSolvingStage) {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const playerInfoRef = firebase.database().ref(`player_info/${username}`);
+
+    // Check if the user got a perfect score
+    if (correctCountProblemSolving === problemSolvingQuestions.length) {
+        modalContent.textContent = `Congratulations! You got a perfect score in the problem-solving stage! 10000 coins added to your account. Brilliance Points: ${brilliancePtsProblemSolvingStage}`;
+        // Add 10000 coins to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + 10000;
+        });
+    } else {
+        // Generate a random reward between 200 and 300 coins
+        const randomReward = Math.floor(Math.random() * (300 - 200 + 1) + 200);
+        // Add the random reward to the existing amount
+        playerInfoRef.child("coin").transaction(function(currentCoin) {
+            return (+currentCoin || 0) + randomReward;
+        });
+
+        modalContent.textContent = `You got ${correctCountProblemSolving} out of ${problemSolvingQuestions.length} correct. You received a reward of ${randomReward} coins! Brilliance Points: ${brilliancePtsProblemSolvingStage}`;
+    }
+
+    modal.classList.remove('hidden');
+}
 
 
 //=================================================================================================
@@ -1441,5 +1566,6 @@ function displayResultFinalStage(correctCountFinalStage, brilliancePtsFinalStage
         generateQuizStage9();
         generateQuizStage10();
         generateQuizFinalStage();
+        generateQuizProblemSolving();
     };
 

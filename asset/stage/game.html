@@ -21,7 +21,7 @@
 
 </style>
 <body class="bg-gray-800 overflow-auto w-screen">
-    <audio autoplay="" loop src="./src/sound/bg.mp3"></audio>
+    <audio autoplay="" loop src="../src/sound/bg.mp3"></audio>
     <audio id="clickSound" src="../src/sound/click.mp3"></audio>
     <!-- Header -->
     <header class="bg-gray-900 text-white py-4 px-2 md:px-16">
@@ -195,7 +195,7 @@
      <!-- =================================================================================================
     QUIZ
     ================================================================================================= -->
-    <section id="final-stage" class="py-4 px-5 md:px-16 hidden">
+    <section id="stage_final" class="py-4 px-5 md:px-16 hidden">
         <h1 class="text-2xl font-bold mb-4 text-white">QUIZ</h1>
     
         <!-- Questions will be added here dynamically using JavaScript -->
@@ -206,13 +206,27 @@
         <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersFinalStage()">Submit Answers</button>
     </section>
     
+     <!-- =================================================================================================
+    ADDITIONAL STAGE
+    ================================================================================================= -->
+    <section id="problem-solving-stage" class="py-4 px-5 md:px-16 hidden">
+        <h1 class="text-2xl font-bold mb-4 text-white">PROBLEM SOLVING</h1>
+    
+        <!-- Questions will be added here dynamically using JavaScript -->
+        <div id="quiz-container-problem-solving">
+            <!-- Questions will be added here dynamically using JavaScript -->
+        </div>
+    
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onclick="checkAnswersProblemSolving()">Submit Answers</button>
+    </section>
+    
  <!-- =================================================================================================
    SCRIPT
     ================================================================================================= -->
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script src="./auth//config.js"></script>
+    <script src="./auth/config.js"></script>
     <script>
 
 

@@ -11,19 +11,33 @@ const decimalNumbers = [0.2, 0.5, 0.6, 2.8, 1.9];
 // Correct answers
 const correctAnswers = ['1/5', '1/2', '3/5', '2 4/5', '1 9/10'];
 
+
+const choices = [
+    [ '1/4', '1/3', '1/2', '1/5'],
+    ['1/2', '2/5', '3/4', '2/3'],
+    ['1/2', '3/5', '2/3', '5/6'],
+    [ '2 3/5', '3 4/5', '2 4/5', '2 2/5'],
+    ['1 9/10', '1 8/9', '1 10/11', '1 11/10']
+  ];
+
+
 // Function to generate quiz questions
 function generateQuiz() {
-    const quizContainer = document.getElementById('quiz-container');
+  const quizContainer = document.getElementById('quiz-container');
 
-    decimalNumbers.forEach((decimal, index) => {
-        const question = document.createElement('div');
-        question.className = 'mb-4';
-        question.innerHTML = `
-            <label for="answer${index}" class="text-lg text-white font-medium">${index + 1}. ${decimal} = </label>
-            <input type="text" id="answer${index}" class="bg-gray-700 border text-white border-white px-2 py-1 rounded-md focus:outline-none focus:border-blue-500">
-        `;
-        quizContainer.appendChild(question);
-    });
+  decimalNumbers.forEach((decimal, index) => {
+    const options = choices[index];
+    const question = document.createElement('div');
+    question.className = 'mb-4';
+    question.innerHTML = `
+      <label for="answer${index}" class="text-lg text-white font-medium">${index + 1}. ${decimal} = </label>
+      <select id="answer${index}" class="bg-gray-700 border text-white border-white px-2 py-1 rounded-md focus:outline-none focus:border-blue-500">
+        <option value="" disabled selected>Select Fraction</option>
+        ${options.map(option => `<option value="${option}">${option}</option>`).join('')}
+      </select>
+    `;
+    quizContainer.appendChild(question);
+  });
 }
 // Function to check answers and update database
 function checkAnswers() {
@@ -94,28 +108,57 @@ function displayResult(message) {
 //     STAGE 2
 //=================================================================================================
 
-    // Decimal numbers for Stage 2
-    const decimalNumbersStage2 = [0.25, 0.72, 0.33, 0.75, 1.45, 0.18, 4.67, 0.94, 0.56, 2.88];
+// Decimal numbers for Stage 2
+const decimalNumbersStage2 = [0.25, 0.72, 0.33, 0.75, 1.45, 0.18, 4.67, 0.94, 0.56, 2.88];
 
-    // Correct answers for Stage 2
-    const correctAnswersStage2 = ['1/4', '18/25', '33/100', '3/4', '1 9/20', '9/50', '4 67/100', '47/50', '14/25', '2 22/25'];
+// Choices for Stage 2
+const choicesStage2 = [
+    ['1/4', '2/5', '3/8', '1/3'],
+    [ '3/4', '7/8','18/25', '11/12'],
+    ['33/100', '17/50', '1/3', '2/5'],
+    [ '5/6', '2/3', '3/4','7/8'],
+    [ '1 1/2', '1 9/20','1 4/5', '1 3/4'],
+    ['9/50', '1/8', '1/4', '3/5'],
+    ['4 67/100', '3 3/4', '4 3/5', '4 1/2'],
+    [ '9/10', '23/25','47/50', '43/50'],
+    [ '3/5', '7/8', '11/20','14/25'],
+    ['2 22/25', '2 1/2', '3 1/4', '2 3/4'],
+];
 
-    // Function to generate quiz questions for Stage 2
-    function generateQuizStage2() {
-        const quizContainerStage2 = document.getElementById('quiz-container-stage2');
-
-        decimalNumbersStage2.forEach((decimal, index) => {
-            const question = document.createElement('div');
-            question.className = 'mb-4';
-            question.innerHTML = `
-                <label for="answerStage2${index}" class="text-lg font-medium text-white">${index + 1}. ${decimal} = </label>
-                <input type="text" id="answerStage2${index}" class="border border-white bg-gray-700 text-white px-2 py-1 rounded-md focus:outline-none focus:border-blue-500">
-            `;
-            quizContainerStage2.appendChild(question);
-        });
+// Function to shuffle the choices array
+function shuffleChoices(choices) {
+    for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [choices[i], choices[j]] = [choices[j], choices[i]];
     }
+    return choices;
+}
 
-  // Function to check answers for Stage 2
+// Shuffle the choices for Stage 2
+choicesStage2.forEach(choices => shuffleChoices(choices));
+
+// Correct answers for Stage 2
+const correctAnswersStage2 = ['1/4', '18/25', '33/100', '3/4', '1 9/20', '9/50', '4 67/100', '47/50', '14/25', '2 22/25'];
+
+// Function to generate quiz questions for Stage 2
+function generateQuizStage2() {
+    const quizContainerStage2 = document.getElementById('quiz-container-stage2');
+
+    decimalNumbersStage2.forEach((decimal, index) => {
+        const question = document.createElement('div');
+        question.className = 'mb-4';
+        question.innerHTML = `
+            <label for="answerStage2${index}" class="text-lg font-medium text-white">${index + 1}. ${decimal} = </label>
+            <select id="answerStage2${index}" class="border border-white bg-gray-700 text-white px-2 py-1 rounded-md focus:outline-none focus:border-blue-500">
+                <option value="" disabled selected>Select Fraction</option>
+                ${choicesStage2[index].map(choice => `<option value="${choice}">${choice}</option>`).join('')}
+            </select>
+        `;
+        quizContainerStage2.appendChild(question);
+    });
+}
+
+// Function to check answers for Stage 2
 function checkAnswersStage2() {
     playClickSound();
     let correctCountStage2 = 0;
@@ -180,7 +223,6 @@ function displayResultStage2(correctCountStage2, brilliancePtsStage2) {
 
     modal.classList.remove('hidden');
 }
-
 //=================================================================================================
 //     STAGE 3
 //=================================================================================================
